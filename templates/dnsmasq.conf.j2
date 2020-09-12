@@ -113,6 +113,7 @@ no-poll
 {% if dnsmasq_servers is defined %}
 {% for item in dnsmasq_servers %}
 server={% if item.domain is defined %}/{{ item.domain }}/{% endif %}{% if item.destination is defined %}{{ item.destination }}@{% endif %}{{ item.nameserver }}{% if item.interface is defined %}@{{ item.interface }}{% if item.port is defined %}#{{ item.port }}{% endif %}{% endif %}
+
 {% endfor %}
 {% endif %}
 
@@ -122,6 +123,7 @@ server={% if item.domain is defined %}/{{ item.domain }}/{% endif %}{% if item.d
 {% if dnsmasq_locals is defined %}
 {% for item in dnsmasq_locals %}
 local=/{{ item.domain }}/
+
 {% endfor %}
 {% endif %}
 
@@ -135,6 +137,7 @@ local=/{{ item.domain }}/
 {% if dnsmasq_addresses is defined %}
 {% for item in dnsmasq_addresses %}
 address=/{{ item.domain }}/{{ item.address }}
+
 {% endfor %}
 {% endif %}
 
@@ -144,6 +147,7 @@ address=/{{ item.domain }}/{{ item.address }}
 {% if dnsmasq_ipsets is defined %}
 {% for item in dnsmasq_ipsets %}
 ipset=/{% for domain in item.domains %}{{ domain }}/{% endfor %}{{ item.destination }},{{ item.option }}
+
 {% endfor %}
 {% endif %}
 
@@ -168,6 +172,7 @@ group={{ dnsmasq_group }}
 {% if dnsmasq_interfaces is defined %}
 {% for item in dnsmasq_interfaces %}
 interface={{ item.name }}
+
 {% endfor %}
 {% else %}
 #interface=
@@ -185,6 +190,7 @@ except-interface={{ dnsmasq_except_interface }}
 {% if dnsmasq_listen_addresses is defined %}
 {% for item in dnsmasq_listen_addresses %}
 listen-address={{ item.name }}
+
 {% endfor %}
 {% else %}
 #listen-address=
@@ -259,6 +265,7 @@ expand-hosts
 {% if dnsmasq_domains is defined %}
 {% for item in dnsmasq_domains %}
 domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
+
 {% endfor %}
 {% endif %}
 
@@ -324,6 +331,7 @@ domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endi
 {% if dnsmasq_dhcp_ranges is defined %}
 {% for item in dnsmasq_dhcp_ranges %}
 dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},{% endfor %}{% endif %}{% if item.tags is defined %}{% for tag in item.tags %}tag:{{ tag }},{% endfor %}{% endif %}{{ item.from }}{% if item.until is defined %}, {{ item.until }}{% endif %}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.leasetime is defined %},{{ item.leasetime }}{% endif %}{% if item.options is defined %},{% for option in item.options %}{{ option }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}
+
 {% endfor %}
 {% endif %}
 
@@ -565,7 +573,8 @@ read-ethers
 #dhcp-option=vendor:Etherboot,60,"Etherboot"
 {% if dnsmasq_dhcp_options is defined %}
 {% for item in dnsmasq_dhcp_options %}
-dhcp-option={{ item.name }}{% if item.value is defined %},{{ item.value }}{% endif %}
+dhcp-option={% if item.tag is defined %}tag:{{ item.tag }}, {% endif %}{{ item.name }}{% if item.value is defined %},{{ item.value }}{% endif %}
+
 {% endfor %}
 {% endif %}
 
@@ -584,6 +593,7 @@ dhcp-option={{ item.name }}{% if item.value is defined %},{{ item.value }}{% end
 {% if dnsmasq_dhcp_option_force is defined %}
 {% for item in dnsmasq_dhcp_option_force %}
 dhcp-option-force={{ item.name }},{{ item.value }}
+
 {% endfor %}
 {% endif %}
 
@@ -804,6 +814,7 @@ bogus-nxdomain={{ dnsmasq_bogus_nxdomain }}
 {% if dnsmasq_aliases is defined %}
 {% for item in dnsmasq_aliases %}
 alias={{ item.from }},{{ item.to }}{% if item.subnet is defined %},{{ item.subnet }}{% endif%}
+
 {% endfor %}
 {% endif %}
 
@@ -818,6 +829,7 @@ alias={{ item.from }},{{ item.to }}{% if item.subnet is defined %},{{ item.subne
 {% if dnsmasq_mx_hosts is defined %}
 {% for item in dnsmasq_mx_hosts %}
 mx-host={{ item.domain }}{% if item.host is defined %},{{ item.host }},{{ item.priority }}{% endif %}
+
 {% endfor %}
 {% endif %}
 
@@ -866,6 +878,7 @@ selfmx
 {% if dnsmasq_src_hosts is defined %}
 {% for item in dnsmasq_src_hosts %}
 src-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
+
 {% endfor %}
 {% endif %}
 

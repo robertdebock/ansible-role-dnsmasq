@@ -5,7 +5,7 @@
 
 dnsmasq_domain_needed: no
 dnsmasq_bogus_priv: no
-dnsmasq_conf_file: /usr/share/dnsmasq/trust-anchors.conf
+dnsmasq_conf_file: "{{ dnsmasq_documentation_path }}/trust-anchors.conf"
 dnsmasq_dnssec: no
 dnsmasq_dnssec_check_unsigned: no
 dnsmasq_filterwin2k: no
@@ -137,8 +137,8 @@ dnsmasq_dhcp_options:
     value: "[1234::77],[1234::88]"
   - name: "option6:dns-server"
     value: "[::],[1234::88]"
-  - name: option6
-    value: information-refresh-time,6h
+  - name: option6:information-refresh-time
+    value: 6h
   - name: "option:T1"
     value: 1m
   - name: "option:T2"
@@ -155,7 +155,7 @@ dnsmasq_dhcp_options:
     value: "e4:45:74:68:00:00"
   - name: 129
     value: NIC=eepro100
-  - name: option:ntp-server,
+  - name: option:ntp-server
     tag: red
     value: 192.168.1.1
   - name: 19

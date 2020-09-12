@@ -9,7 +9,15 @@ dnsmasq_configuration_file: /etc/dnsmasq.conf
 
 dnsmasq_user: root
 _dnsmasq_group:
+  default: dnsmasq
   RedHat: dnsmasq
   Debian: root
 
-dnsmasq_group: "{{ _dnsmasq_group[ansible_os_family] }}"
+dnsmasq_group: "{{ _dnsmasq_group[ansible_os_family] | default(_dnsmasq_group['default']) }}"
+
+_dnsmasq_documentation_path:
+  default: /usr/share/dnsmasq
+  Debian: /usr/share/dnsmasq-base
+  RedHat: /usr/share/dnsmasq
+
+dnsmasq_documentation_path: "{{ _dnsmasq_documentation_path[ansible_os_family] | default(_dnsmasq_documentation_path['default']) }}"
