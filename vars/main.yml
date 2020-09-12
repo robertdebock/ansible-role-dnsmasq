@@ -8,4 +8,8 @@ dnsmasq_service: dnsmasq
 dnsmasq_configuration_file: /etc/dnsmasq.conf
 
 dnsmasq_user: root
-dnsmasq_group: dnsmasq
+_dnsmasq_group:
+  RedHat: dnsmasq
+  Debian: root
+
+dnsmasq_group: "{{ _dnsmasq_group[ansible_os_family] }}"
