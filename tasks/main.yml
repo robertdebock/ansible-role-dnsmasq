@@ -16,6 +16,7 @@
     group: "{{ dnsmasq_group }}"
     mode: "0644"
   notify:
+    - test dnsmasq configuration
     - restart dnsmasq
 
 - name: start and enable dnsmasq
