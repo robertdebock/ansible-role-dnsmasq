@@ -112,14 +112,14 @@ no-poll
 #server=/3.168.192.in-addr.arpa/10.1.2.3
 {% if dnsmasq_servers is defined %}
 {% for item in dnsmasq_servers %}
-server={% if item.domain is defined %}/{{ item.domain }}/{% endif %}{% if item.destination is defined %}{{ item.destination }}@{% endfor %}{{ item.nameserver }}{% if item.interface is defined %}@{{ item.interface }}{% if item.port is defined %}#{{ item.port }}{% endif %}{% endif %}
+server={% if item.domain is defined %}/{{ item.domain }}/{% endif %}{% if item.destination is defined %}{{ item.destination }}@{% endif %}{{ item.nameserver }}{% if item.interface is defined %}@{{ item.interface }}{% if item.port is defined %}#{{ item.port }}{% endif %}{% endif %}
 {% endfor %}
 {% endif %}
 
 # Add local-only domains here, queries in these domains are answered
 # from /etc/hosts or DHCP only.
 #local=/localnet/
-{# if dnsmasq_locals is defined %}
+{% if dnsmasq_locals is defined %}
 {% for item in dnsmasq_locals %}
 local=/{{ item.domain }}/
 {% endfor %}
@@ -185,6 +185,7 @@ except-interface={{ dnsmasq_except_interface }}
 {% if dnsmasq_listen_addresses is defined %}
 {% for item in dnsmasq_listen_addresses %}
 listen-address={{ item.name }}
+{% endfor %}
 {% else %}
 #listen-address=
 {% endif %}
@@ -322,7 +323,9 @@ domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endi
 #dhcp-range=1234::, ra-stateless, ra-names
 {% if dnsmasq_dhcp_ranges is defined %}
 {% for item in dnsmasq_dhcp_ranges %}
-dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},{% endfor %}{% endif %}{% if item.tags is defined %}{% for tag in item.tags %}tag:{{ tag }},{% endfor %}{% endif %}{{ item.from }}{% if item.until is defined %}, {{ item.until }}{% endif %}{% if item.subnet is defined %},{{ item.subnet %}{% endif %}{% if item.leasetime is defined %},{{ item.leasetime }}{% endif %}{% if item.options is defined %},{% for option in item.options %}{{ option }}{% if !loop.last %},{% endif %}{% endfor %}{% endif %}
+dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},{% endfor %}{% endif %}{% if item.tags is defined %}{% for tag in item.tags %}tag:{{ tag }},{% endfor %}{% endif %}{{ item.from }}{% if item.until is defined %}, {{ item.until }}{% endif %}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.leasetime is defined %},{{ item.leasetime }}{% endif %}{% if item.options is defined %},{% for option in item.options %}{{ option }}{% if not loop.last %},{% endif %}{% endfor %}{% endif %}
+{% endfor %}
+{% endif %}
 
 ### REV REV REV Done until here. REV REV REV
 # Do router advertisements for all subnets where we're doing DHCPv6
