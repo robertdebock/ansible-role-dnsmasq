@@ -1,31 +1,29 @@
-dnsmasq
-=========
-
-<img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
-<a href="https://travis-ci.org/robertdebock/ansible-role-dnsmasq"> <img src="https://travis-ci.org/robertdebock/ansible-role-dnsmasq.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/"/> <img src="https://img.shields.io/ansible/quality/"/>
-
-<a href="https://github.com/robertdebock/ansible-role-dnsmasq/actions"><img src="https://github.com/robertdebock/ansible-role-dnsmasq/workflows/GitHub%20Action/badge.svg"/></a>
+# [dnsmasq](#dnsmasq)
 
 Install and configure dnsmasq on your system.
 
-Example Playbook
-----------------
+|Travis|GitHub|Quality|Downloads|Version|
+|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-dnsmasq.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-dnsmasq)|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![quality](https://img.shields.io/ansible/quality/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
 
-This example is taken from `molecule/resources/playbook.yml` and is tested on each push, pull request and release.
+## [Example Playbook](#example-playbook)
+
+This example is taken from `molecule/resources/converge.yml` and is tested on each push, pull request and release.
 ```yaml
 ---
-- name: Converge
+- name: converge
   hosts: all
   become: yes
   gather_facts: yes
 
   roles:
-    - role: robertdebock.dnsmasq```
+    - role: robertdebock.dnsmasq
+```
 
-The machine you are running this on, may need to be prepared, I use this playbook to ensure everything is in place to let the role work.
+The machine may need to be prepared using `molecule/resources/prepare.yml`:
 ```yaml
 ---
-- name: Converge
+- name: prepare
   hosts: all
   become: yes
   gather_facts: no
@@ -34,7 +32,7 @@ The machine you are running this on, may need to be prepared, I use this playboo
     - role: robertdebock.bootstrap
 ```
 
-After running this role, this playbook runs to verify that everything works, this may be a good example how you can use this role.
+For verification `molecule/resources/verify.yml` runs after the role has been applied.
 ```yaml
 ---
 - name: Verify
@@ -49,16 +47,253 @@ After running this role, this playbook runs to verify that everything works, thi
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
 
-Role Variables
---------------
+## [Role Variables](#role-variables)
 
 These variables are set in `defaults/main.yml`:
 ```yaml
 ---
-# defaults file for dnsmasq```
+# defaults file for dnsmasq
 
-Requirements
-------------
+# dnsmasq_port: 5353
+
+dnsmasq_domain_needed: no
+dnsmasq_bogus_priv: no
+dnsmasq_conf_file: /usr/share/dnsmasq/trust-anchors.conf
+dnsmasq_dnssec: no
+dnsmasq_dnssec_check_unsigned: no
+dnsmasq_filterwin2k: no
+# dnsmasq_resolv_file: /etc/resolv.conf
+dnsmasq_strict_order: no
+dnsmasq_no_resolv: no
+dnsmasq_no_poll: no
+# dnsmasq_servers:
+#   - domain: localnet
+#     nameserver: 192.168.0.1
+#   - domain: 3.168.192.in-addr.arpa
+#     nameserver: 10.1.2.3
+#   - domain: 10.1.2.3
+#     interface: eth1
+#   - destination: 10.2.3.4
+#     nameserver: 192.168.1.1
+#     interface: 192.168.1.1
+#     port: 55
+# dnsmasq_locals:
+#   - domain: localnet
+# dnsmasq_addresses:
+#   - domain: double-click.net
+#     address: 127.0.0.1
+#   - domain: www.thekelleys.org.uk
+#     address: "fe80::20d:60ff:fe36:f83"
+# dnsmasq_ipsets:
+#   - domains:
+#       - name: yahoo.com
+#       - name: google.com
+#     destination: vpn
+#     option: search
+dnsmasq_user: dnsmasq
+dnsmasq_group: dnsmasq
+# dnsmasq_interfaces:
+#   - name: lo
+#  - name: eth0
+# dnsmasq_except_interface: eth0
+dnsmasq_listen_addresses:
+  - name: 127.0.0.1
+dnsmasq_no_dhcp_interface: ""
+dnsmasq_local_service: no
+dnsmasq_bind_interfaces: no
+dnsmasq_no_hosts: no
+# dnsmasq_addn_hosts: /etc/banner_add_hosts
+dnsmasq_expand_hosts: no
+# dnsmasq_domains:
+#   - name: thekelleys.org.uk
+#   - name: wireless.thekelleys.org.uk
+#     subnet: 192.168.2.0/24A
+#   - name: reserved.thekelleys.org.uk
+#     from: 192.68.3.100
+#     until: 192.168.3.200
+# dnsmasq_dhcp_ranges:
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     leasetime: 12h
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     subnet: 255.255.255.0
+#     leasetime: 12h
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     sets:
+#       - name: red
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     leasetime: 12h
+#     tags:
+#       - name: green
+#   - from: 192.168.0.0
+#     options:
+#       - name: static
+#     static: yes
+#   - from: "1234::2"
+#     until: "1234::500"
+#     prefix: 64
+#     leasetime: 12h
+#   - from: "1234::"
+#     options:
+#       - name: ra-only
+#   - from: "1234::"
+#     options:
+#       - name: ra-names
+#   - from: "1234::"
+#     options:
+#       - name: ra-only
+#     leasetime: 48hA
+#   - from: "1234::2"
+#     until: "1234::500"
+#     options:
+#       - name: slaac
+#   - from: "1234::"
+#     options:
+#        - name: ra-stateless
+#   - from: "1234::"
+#     options:
+#       - name: ra-stateless
+#       - name: ra-names
+dnsmasq_enable_ra: no
+# dnsmasq_hosts:
+#   - name: "11:22:33:44:55:66"
+#     value: 192.168.0.60
+#   - name: "11:22:33:44:55:66"
+#     value: fred
+#   - name: "11:22:33:44:55:66"
+#     value: fred,192.168.0.60,45m
+#   - name: "11:22:33:44:55:66,12:34:56:78:90:12"
+#     value: 192.168.0.60
+#   - name: bert
+#     value: 192.168.0.70,infinite
+#   - name: "id:01:02:02:04"
+#     value: 192.168.0.60
+#   - name: "id:ff:00:00:00:00:00:02:00:00:02:c9:00:f4:52:14:03:00:28:05:81"
+#     value: 192.168.0.61
+# dnsmasq_dhcp_ignore: tag:!known
+# dnsmasq_dhcp_vendorclass: set:red,Linux
+# dnsmasq_dhcp_userclass: set:red,accounts
+dnsmasq_dhcp_mac: "set:red,00:60:8C:*:*:*"
+dnsmasq_read_ethers: no
+dnsmasq_dhcp_options:
+  - name: 3
+    value: 1.2.3.4
+  - name: "option:router"
+    value: 1.2.3.4
+  - name: 3
+  - name: "option:ntp-server"
+    value: 192.168.0.4,10.10.0.5
+  - name: "option6:dns-server"
+    value: "[1234::77],[1234::88]"
+  - name: "option6:dns-server"
+    value: "[::],[1234::88]"
+  - name: option6
+    value: information-refresh-time,6h
+  - name: "option:T1"
+    value: 1m
+  - name: "option:T2"
+    value: 2m
+  - name: 42
+    value: 0.0.0.0
+  - name: 40
+    value: welly
+  - name: 23
+    value: 50
+  - name: 27
+    value: 1
+  - name: 128
+    value: "e4:45:74:68:00:00"
+  - name: 129
+    value: NIC=eepro100
+  - name: option:ntp-server,
+    tag: red
+    value: 192.168.1.1
+  - name: 19
+    value: 0
+  - name: 44
+    value: 0.0.0.0
+  - name: 45
+    value: 0.0.0.0
+  - name: 46
+    value: 8
+  - name: 252
+    value: "\n"
+  - name: "option:domain-search"
+    value: eng.apple.com,marketing.apple.com
+  - name: 121
+    value: 192.168.1.0/24,1.2.3.4,10.0.0.0/8,5.6.7.8
+  - name: "vendor:PXEClient"
+    value: 1,0.0.0.0
+  - name: "vendor:MSFT"
+    value: 2,1i
+  - name: "vendor:Etherboot"
+    value: 60,"Etherboot"
+dnsmasq_dhcp_option_force:
+  - name: 208
+    value: "f1:00:74:7e"
+  - name: 209
+    value: configs/common
+  - name: 210
+    value: /tftpboot/pxelinux/files/
+  - name: 211
+    value: 30i
+# dnsmasq_dhcp_boot: pxelinux.0
+# dnsmasq_dhcp_boot: pxelinux.0,server.name,192.168.1.100
+dnsmasq_enable_tftp: no
+# dnsmasq_tftp_root: /var/ftpd
+dnsmasq_tftp_no_fail: no
+dnsmasq_tftp_secure: no
+dnsmasq_tftp_no_blocksize: no
+# dnsmasq_dhcp_lease_max: 150
+# dnsmasq_dhcp_leasefile: /var/lib/dnsmasq/dnsmasq.leases
+dnsmasq_dhcp_authoritative: no
+dnsmasq_dhcp_rapid_commit: no
+dnsmasq_dhcp_script: /bin/echo
+# dnsmasq_cache_size: 150
+dnsmasq_no_negcache: no
+# dnsmasq_local_ttl: 3600
+# dnsmasq_bogus_nxdomain: 64.94.110.11
+# dnsmasq_aliases:
+#   - from: 1.2.3.4
+#     to: 4.5.6.7
+#   - from: 1.2.3.0
+#     to: 5.6.7.0
+#     subnet: 255.255.255.0
+#   - from: 192.168.0.10-192.168.0.40
+#     to: 10.0.0.0
+#     subnet: 255.255.255.0
+# dnsmasq_mx_hosts:
+#   - domain: maildomain.com
+#     host: servermacine.com
+#     priority: 50
+#   - domain: servermachine.com
+dnsmasq_localmx: no
+dnsmasq_selfmx: no
+# dnsmasq_src_hosts:
+#   - record: _ldap._tcp.example.com
+#     destination: ldapserver.example.com
+#     port: 389
+#   - record: _ldap._tcp.example.com
+#     destination: ldapserver.example.com
+#     port: 389
+#     priority: 1
+#   - record: _ldap._tcp.example.com
+#     destination: ldapserver.example.com
+#     port: 389
+#     priority: 2
+#   - record: _ldap._tcp.example.com
+dnsmasq_log_queries: no
+dnsmasq_log_dhcp: no
+# dnsmasq_conf_file: /etc/dnsmasq.more.conf
+# dnsmasq_conf_dir: /etc/dnsmasq.d
+# dnsmasq_dhcp_name_match: set:wpad-ignore,wpad
+# dnsmasq_ignore_names: tag:wpad-ignore
+```
+
+## [Requirements](#requirements)
 
 - Access to a repository containing packages, likely on the internet.
 - A recent version of Ansible. (Tests run on the current, previous and next release of Ansible.)
@@ -71,19 +306,16 @@ The following roles can be installed to ensure all requirements are met, using `
 
 ```
 
-Context
--------
+## [Context](#context)
 
 This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
 
 Here is an overview of related roles:
 ![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/dnsmasq.png "Dependency")
 
+## [Compatibility](#compatibility)
 
-Compatibility
--------------
-
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
@@ -92,9 +324,9 @@ This role has been tested on these [container images](https://hub.docker.com/):
 |el|7, 8|
 |fedora|all|
 |opensuse|all|
-|ubuntu|bionic|
+|ubuntu|all|
 
-The minimum version of Ansible required is 2.7 but tests have been done to:
+The minimum version of Ansible required is 2.8 but tests have been done to:
 
 - The previous version, on version lower.
 - The current version.
@@ -102,10 +334,9 @@ The minimum version of Ansible required is 2.7 but tests have been done to:
 
 
 
-Testing
--------
+## [Testing](#testing)
 
-[Unit tests](https://travis-ci.org/robertdebock/ansible-role-dnsmasq) are done on every commit, pull request, release and periodically.
+[Unit tests](https://travis-ci.com/robertdebock/ansible-role-dnsmasq) are done on every commit, pull request, release and periodically.
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-dnsmasq/issues)
 
@@ -137,13 +368,13 @@ image="centos" tox
 image="debian" tag="stable" tox
 ```
 
-License
--------
+## [License](#license)
 
 Apache-2.0
 
 
-Author Information
-------------------
+## [Author Information](#author-information)
 
 [Robert de Bock](https://robertdebock.nl/)
+
+Please consider [sponsoring me](https://github.com/sponsors/robertdebock).

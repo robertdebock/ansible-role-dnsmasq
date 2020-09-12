@@ -327,13 +327,16 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 {% endfor %}
 {% endif %}
 
-### REV REV REV Done until here. REV REV REV
 # Do router advertisements for all subnets where we're doing DHCPv6
 # Unless overridden by ra-stateless, ra-names, et al, the router 
 # advertisements will have the M and O bits set, so that the clients
 # get addresses and configuration from DHCPv6, and the A bit reset, so the 
 # clients don't use SLAAC addresses.
+{% if dnsmasq_enable_ra is defined and dnsmasq_enable_ra %}
+enable-ra
+{% else %}
 #enable-ra
+{% endif %}
 
 # Supply parameters for specified hosts using DHCP. There are lots
 # of valid alternatives, so we will give examples of each. Note that
@@ -414,25 +417,45 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # or /etc/ethers. Equivalent to ISC "deny unknown-clients".
 # This relies on the special "known" tag which is set when
 # a host is matched.
+{% if dnsmasq_dhcp_ignore is defined %}
+dhcp-ignore={{ dnsmasq_dhcp_ignore }}
+{% else %}
 #dhcp-ignore=tag:!known
+{% endif %}
 
 # Send extra options which are tagged as "red" to any machine whose
 # DHCP vendorclass string includes the substring "Linux"
+{% if dnsmasq_dhcp_vendorclass is defined %}
 #dhcp-vendorclass=set:red,Linux
+{% else %}
+#dhcp-vendorclass=set:red,Linux
+{% endif %}
 
 # Send extra options which are tagged as "red" to any machine one
 # of whose DHCP userclass strings includes the substring "accounts"
+{% if dnsmasq_dhcp_userclass is defined %}
+dhcp-userclass={{ dnsmasq_dhcp_userclass }}
+{% else %}
 #dhcp-userclass=set:red,accounts
+{% endif %}
 
 # Send extra options which are tagged as "red" to any machine whose
 # MAC address matches the pattern.
+{% if dnsmasq_dhcp_mac is defined %}
+dhcp-mac={{ dnsmasq_dhcp_mac }}
+{% else %}
 #dhcp-mac=set:red,00:60:8C:*:*:*
+{% endif %}
 
 # If this line is uncommented, dnsmasq will read /etc/ethers and act
 # on the ethernet-address/IP pairs found there just as if they had
 # been given as --dhcp-host options. Useful if you keep
 # MAC-address/host mappings there for other purposes.
+{% if dnsmasq_read_ethers is defined and dnsmasq_read_ethers %}
+read-ethers
+{% else %}
 #read-ethers
+{% endif %}
 
 # Send options to hosts which ask for a DHCP lease.
 # See RFC 2132 for details of available options.
@@ -540,6 +563,11 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # Send the Encapsulated-vendor-class ID needed by some configurations of
 # Etherboot to allow is to recognise the DHCP server.
 #dhcp-option=vendor:Etherboot,60,"Etherboot"
+{% if dnsmasq_dhcp_options is defined %}
+{% for item in dnsmasq_dhcp_options %}
+dhcp-option={{ item.name }}{% if item.value is defined %},{{ item.value }}{% endif %}
+{% endfor %}
+{% endif %}
 
 # Send options to PXELinux. Note that we need to send the options even
 # though they don't appear in the parameter request list, so we need
@@ -553,15 +581,24 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 #dhcp-option-force=210,/tftpboot/pxelinux/files/
 # Reboot time. (Note 'i' to send 32-bit value)
 #dhcp-option-force=211,30i
+{% if dnsmasq_dhcp_option_force is defined %}
+{% for item in dnsmasq_dhcp_option_force %}
+dhcp-option-force={{ item.name }},{{ item.value }}
+{% endfor %}
+{% endif %}
 
 # Set the boot filename for netboot/PXE. You will only need
 # this if you want to boot machines over the network and you will need
 # a TFTP server; either dnsmasq's built-in TFTP server or an
 # external one. (See below for how to enable the TFTP server.)
-#dhcp-boot=pxelinux.0
 
 # The same as above, but use custom tftp-server instead machine running dnsmasq
 #dhcp-boot=pxelinux,server.name,192.168.1.100
+{% if dnsmasq_dhcp_boot is defined %}
+dhcp-boot={{ dnsmasq_dhcp_boot }}
+{% else %}
+#dhcp-boot=pxelinux.0
+{% endif %}
 
 # Boot for iPXE. The idea is to send two different
 # filenames, the first loads iPXE, and the second tells iPXE what to
@@ -615,22 +652,42 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 
 
 # Enable dnsmasq's built-in TFTP server
+{% if dnsmasq_enable_tftp is defined and dnsmasq_enable_tftp %}
+enable-tftp
+{% else %}
 #enable-tftp
+{% endif %}
 
 # Set the root directory for files available via FTP.
+{% if dnsmasq_tftp_root is defined %}
+tftp-root={{ dnsmasq_tftp_root }}
+{% else %}
 #tftp-root=/var/ftpd
+{% endif %}
 
 # Do not abort if the tftp-root is unavailable
+{% if dnsmasq_tftp_no_fail is defined and dnsmasq_tftp_no_fail %}
+tftp-no-fail
+{% else %}
 #tftp-no-fail
+{% endif %}
 
 # Make the TFTP server more secure: with this set, only files owned by
 # the user dnsmasq is running as will be send over the net.
+{% if dnsmasq_tftp_secure is defined and dnsmasq_tftp_secure %}
+tftp-secure
+{% else %}
 #tftp-secure
+{% endif %}
 
 # This option stops dnsmasq from negotiating a larger blocksize for TFTP
 # transfers. It will slow things down, but may rescue some broken TFTP
 # clients.
+{% if dnsmasq_tftp_no_blocksize is defined and dnsmasq_tftp_no_blocksize %}
+tftp-no-blocksize
+{% else %}
 #tftp-no-blocksize
+{% endif %}
 
 # Set the boot file name only when the "red" tag is set.
 #dhcp-boot=tag:red,pxelinux.red-net
@@ -649,12 +706,20 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 #dhcp-boot=/var/ftpd/pxelinux.0,boothost,tftp_server_name
 
 # Set the limit on DHCP leases, the default is 150
+{% if dnsmasq_dhcp_lease_max is defined %}
+dhcp-lease-max={{ dnsmasq_dhcp_lease_max }}
+{% else %}
 #dhcp-lease-max=150
+{% endif %}
 
 # The DHCP server needs somewhere on disk to keep its lease database.
 # This defaults to a sane location, but if you want to change it, use
 # the line below.
+{% if dnsmasq_dhcp_leasefile is defined %}
+dhcp-leasefile={{ dnsmasq_dhcp_leasefile }}
+{% else %}
 #dhcp-leasefile=/var/lib/dnsmasq/dnsmasq.leases
+{% endif %}
 
 # Set the DHCP server to authoritative mode. In this mode it will barge in
 # and take over the lease for any client which broadcasts on the network,
@@ -664,7 +729,11 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # server for your campus/company accidentally. The ISC server uses
 # the same option, and this URL provides more information:
 # http://www.isc.org/files/auth.html
+{% if dnsmasq_dhcp_authoritative is defined and dnsmasq_dhcp_authoritative %}
+dhcp-authoritative
+{% else %}
 #dhcp-authoritative
+{% endif %}
 
 # Set the DHCP server to enable DHCPv4 Rapid Commit Option per RFC 4039.
 # In this mode it will respond to a DHCPDISCOVER message including a Rapid Commit
@@ -672,33 +741,57 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # and configuration information. This must only be enabled if either the server is 
 # the only server for the subnet, or multiple servers are present and they each
 # commit a binding for all clients.
+{% if dnsmasq_dhcp_rapid_commit is defined and dnsmasq_dhcp_rapid_commit %}
+dhcp-rapid-commit
+{% else %}
 #dhcp-rapid-commit
+{% endif %}
 
 # Run an executable when a DHCP lease is created or destroyed.
 # The arguments sent to the script are "add" or "del",
 # then the MAC address, the IP address and finally the hostname
 # if there is one.
+{% if dnsmasq_dhcp_script is defined %}
+dhcp-script={{ dnsmasq_dhcp_script }}
+{% else %}
 #dhcp-script=/bin/echo
+{% endif %}
 
 # Set the cachesize here.
+{% if dnsmasq_cache_size is defined %}
+cache-size={{ dnsmasq_cache_size }}
+{% else %}
 #cache-size=150
+{% endif %}
 
 # If you want to disable negative caching, uncomment this.
+{% if dnsmasq_no_negcache is defined and dnsmasq_no_negcache %}
+no-negcache
+{% else %}
 #no-negcache
+{% endif %}
 
 # Normally responses which come from /etc/hosts and the DHCP lease
 # file have Time-To-Live set as zero, which conventionally means
 # do not cache further. If you are happy to trade lower load on the
 # server for potentially stale date, you can set a time-to-live (in
 # seconds) here.
+{% if dnsmasq_local_ttl is defined %}
+local-ttl={{ dnsmasq_local_ttl }}
+{% else %}
 #local-ttl=
+{% endif %}
 
 # If you want dnsmasq to detect attempts by Verisign to send queries
 # to unregistered .com and .net hosts to its sitefinder service and
 # have dnsmasq instead return the correct NXDOMAIN response, uncomment
 # this line. You can add similar lines to do the same for other
 # registries which have implemented wildcard A records.
+{% if dnsmasq_bogus_nxdomain is defined %}
+bogus-nxdomain={{ dnsmasq_bogus_nxdomain }}
+{% else %}
 #bogus-nxdomain=64.94.110.11
+{% endif %}
 
 # If you want to fix up DNS results from upstream servers, use the
 # alias option. This only works for IPv4.
@@ -708,6 +801,11 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 #alias=1.2.3.0,5.6.7.0,255.255.255.0
 # and this maps 192.168.0.10->192.168.0.40 to 10.0.0.10->10.0.0.40
 #alias=192.168.0.10-192.168.0.40,10.0.0.0,255.255.255.0
+{% if dnsmasq_aliases is defined %}
+{% for item in dnsmasq_aliases %}
+alias={{ item.from }},{{ item.to }}{% if item.subnet is defined %},{{ item.subnet }}{% endif%}
+{% endfor %}
+{% endif %}
 
 # Change these lines if you want dnsmasq to serve MX records.
 
@@ -717,13 +815,26 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 
 # Set the default target for MX records created using the localmx option.
 #mx-target=servermachine.com
+{% if dnsmasq_mx_hosts is defined %}
+{% for item in dnsmasq_mx_hosts %}
+mx-host={{ item.domain }}{% if item.host is defined %},{{ item.host }},{{ item.priority }}{% endif %}
+{% endfor %}
+{% endif %}
 
 # Return an MX record pointing to the mx-target for all local
 # machines.
+{% if dnsmasq_localmx is defined and dnsmasq_localmx %}
+localmx
+{% else %}
 #localmx
+{% endif %}
 
 # Return an MX record pointing to itself for all local machines.
+{% if dnsmasq_selfmx is defined and dnsmasq_selfmx %}
+selfmx
+{% else %}
 #selfmx
+{% endif %}
 
 # Change the following lines if you want dnsmasq to serve SRV
 # records.  These are useful if you want to serve ldap requests for
@@ -752,6 +863,11 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # A SRV record indicating that there is no LDAP server for the domain
 # example.com
 #srv-host=_ldap._tcp.example.com
+{% if dnsmasq_src_hosts is defined %}
+{% for item in dnsmasq_src_hosts %}
+src-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
+{% endfor %}
+{% endif %}
 
 # The following line shows how to make dnsmasq serve an arbitrary PTR
 # record. This is useful for DNS-SD. (Note that the
@@ -777,14 +893,30 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 
 # For debugging purposes, log each DNS query as it passes through
 # dnsmasq.
+{% if dnsmasq_log_queries is defined and dnsmasq_log_queries %}
+log-queries
+{% else %}
 #log-queries
+{% endif %}
 
 # Log lots of extra information about DHCP transactions.
+{% if dnsmasq_log_dhcp is defined and dnsmasq_log_dhcp %}
+log-dhcp
+{% else %}
 #log-dhcp
+{% endif %}
 
 # Include another lot of configuration options.
+{% if dnsmasq_conf_file is defined %}
+conf-file={{ dnsmasq_conf_file }}
+{% else %}
 #conf-file=/etc/dnsmasq.more.conf
+{% endif %}
+{% if dnsmasq_conf_dir is defined %}
+conf-dir={{ dnsmasq_conf_dir }}
+{% else %}
 #conf-dir=/etc/dnsmasq.d
+{% endif %}
 
 # Include all the files in a directory except those ending in .bak
 #conf-dir=/etc/dnsmasq.d,.bak
@@ -795,8 +927,16 @@ dhcp-range={% if item.sets is defined %}{% for set in item.sets %}set:{{ set }},
 # Include all files in /etc/dnsmasq.d except RPM backup files
 conf-dir=/etc/dnsmasq.d,.rpmnew,.rpmsave,.rpmorig
 
+
 # If a DHCP client claims that its name is "wpad", ignore that.
 # This fixes a security hole. see CERT Vulnerability VU#598349
+{% if dnsmasq_dhcp_name_match is defined %}
+dhcp-name-match={{ dnsmasq_dhcp_name_match }}
+{% else %}
 #dhcp-name-match=set:wpad-ignore,wpad
+{% endif %}
+{% if dnsmasq_ignore_names is defined %}
+dhcp-ignore-names={{ dnsmasq_ignore_names }}
+{% else %}
 #dhcp-ignore-names=tag:wpad-ignore
-
+{% endif %}
