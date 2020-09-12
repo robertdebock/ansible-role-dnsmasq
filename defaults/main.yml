@@ -1,0 +1,106 @@
+---
+# defaults file for dnsmasq
+
+# dnsmasq_port: 5353
+
+dnsmasq_domain_needed: no
+dnsmasq_bogus_priv: no
+dnsmasq_conf_file: /usr/share/dnsmasq/trust-anchors.conf
+dnsmasq_dnssec: no
+dnsmasq_dnssec_check_unsigned: no
+dnsmasq_filterwin2k: no
+# dnsmasq_resolv_file: /etc/resolv.conf
+dnsmasq_strict_order: no
+dnsmasq_no_resolv: no
+dnsmasq_no_poll: no
+# dnsmasq_servers:
+#   - domain: localnet
+#     nameserver: 192.168.0.1
+#   - domain: 3.168.192.in-addr.arpa
+#     nameserver: 10.1.2.3
+#   - domain: 10.1.2.3
+#     interface: eth1
+#   - destination: 10.2.3.4
+#     nameserver: 192.168.1.1
+#     interface: 192.168.1.1
+#     port: 55
+# dnsmasq_locals:
+#   - domain: localnet
+# dnsmasq_addresses:
+#   - domain: double-click.net
+#     address: 127.0.0.1
+#   - domain: www.thekelleys.org.uk
+#     address: fe80::20d:60ff:fe36:f83
+# dnsmasq_ipsets:
+#   - domains:
+#       - name: yahoo.com
+#       - name: google.com
+#     destination: vpn
+#     option: search
+dnsmasq_user: dnsmasq
+dnsmasq_group: dnsmasq
+# dnsmasq_interfaces:
+#   - name: lo
+#  - name: eth0
+# dnsmasq_except_interface: eth0
+dnsmasq_listen_addresses:
+  - name: 127.0.0.1
+dnsmasq_no_dhcp_interface: ""
+dnsmasq_local_service: no
+dnsmasq_bind_interfaces: no
+dnsmasq_no_hosts: no
+# dnsmasq_addn_hosts: /etc/banner_add_hosts
+dnsmasq_expand_hosts: no
+# dnsmasq_domains:
+#   - name: thekelleys.org.uk
+#   - name: wireless.thekelleys.org.uk
+#     subnet: 192.168.2.0/24A
+#   - name: reserved.thekelleys.org.uk
+#     from: 192.68.3.100
+#     until: 192.168.3.200
+# dnsmasq_dhcp_ranges:
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     leasetime: 12h
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     subnet: 255.255.255.0
+#     leasetime: 12h
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     sets:
+#       - name: red
+#   - from: 192.168.0.50
+#     until: 192.168.0.150
+#     leasetime: 12h
+#     tags:
+#       - name: green
+#   - from: 192.168.0.0
+#     options:
+#       - name: static
+#     static: yes
+#   - from: 1234::2
+#     until: 1234::500
+#     prefix: 64
+#     leasetime: 12h
+#   - from: 1234::
+#     options:
+#       - name: ra-only
+#   - from: 1234::
+#     options:
+#       - name: ra-names
+#   - from: 1234::
+#     options:
+#       - name: ra-only
+#     leasetime: 48hA
+#   - from: 1234::2
+#     until: 1234::500
+#     options:
+#       - name: slaac
+#   - from: 1234::
+#     options:
+#        - name: ra-stateless
+#   - from: 1234::
+#     options:
+#       - name: ra-stateless
+#       - name: ra-names

@@ -1,0 +1,12 @@
+---
+# - name: test if dnsmasq_X is set correctly
+#   assert:
+#     that:
+#       - dnsmasq_X is defined
+#       - dnsmasq_X | length > 0
+#       - dnsmasq_X is iterable
+#       - dnsmasq_X | int
+#       - dnsmasq_X | int >= 0
+#       - dnsmasq_X | type_debug == "bool"
+#       - dnsmasq_X in ["a", "b"]
+#     quiet: yes

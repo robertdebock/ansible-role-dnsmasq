@@ -1,0 +1,25 @@
+---
+# tasks file for dnsmasq
+- name: include assert.yml
+  include_tasks: assert.yml
+
+- name: install dnsmasq
+  package:
+    name: "{{ dnsmasq_packages }}"
+    state: present
+
+- name: configure dnsmasq
+  template:
+    src: dnsmasq.conf.j2
+    dest: "{{ dnsmasq_configuration_file }}"
+    owner: "{{ dnsmasq_user }}"
+    group: "{{ dnsmasq_group }}"
+    mode: "0644"
+  notify:
+    - restart dnsmasq
+
+- name: start and enable dnsmasq
+  service:
+    name: "{{ dnsmasq_service }}"
+    state: started
+    enabled: yes

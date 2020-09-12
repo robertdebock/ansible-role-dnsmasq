@@ -1,0 +1,6 @@
+---
+# handlers file for dnsmasq
+- name: start and enable dnsmasq
+  service:
+    name: "{{ dnsmasq_service }}"
+    state: restarted

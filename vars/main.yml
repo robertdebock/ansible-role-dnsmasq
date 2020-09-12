@@ -1,0 +1,11 @@
+---
+# vars file for dnsmasq
+dnsmasq_packages:
+  - dnsmasq
+
+dnsmasq_service: dnsmasq
+
+dnsmasq_configuration_file: /etc/dnsmasq.conf
+
+dnsmasq_user: root
+dnsmasq_group: dnsmasq
