@@ -193,7 +193,7 @@ listen-address={{ item.name }}
 # configure it as shown above, and then use the following line to
 # disable DHCP and TFTP on it.
 {% if dnsmasq_no_dhcp_interface is defined %}
-no-dhcp-interface={{ dnsmasq_no_dhcp_interface }}"
+no-dhcp-interface="{{ dnsmasq_no_dhcp_interface }}"
 {% else %}
 #no-dhcp-interface=
 {% endif %}
