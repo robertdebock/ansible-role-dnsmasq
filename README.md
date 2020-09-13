@@ -320,9 +320,8 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |---------|----|
 |alpine|all|
 |debian|all|
-|el|7, 8|
+|el|8|
 |fedora|all|
-|opensuse|all|
 |ubuntu|all|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:
@@ -331,6 +330,14 @@ The minimum version of Ansible required is 2.8 but tests have been done to:
 - The current version.
 - The development version.
 
+## [Exceptions](#exceptions)
+
+Some variarations of the build matrix do not work. These are the variations and reasons why the build won't work:
+
+| variation                 | reason                 |
+|---------------------------|------------------------|
+| centos:7 | The file trust-anchors.conf is not available. |
+| suse | Unable to start service dnsmasq: Job for dnsmasq.service failed because the control process exited with error code |
 
 
 ## [Testing](#testing)
