@@ -12,20 +12,20 @@ dnsmasq_service: dnsmasq
 
 dnsmasq_configuration_file: /etc/dnsmasq.conf
 
-_dnsmasq_user:
+_dnsmasq_set_user:
   default: root
   Suse: dnsmasq
 
-dnsmasq_user: "{{ _dnsmasq_user[ansible_os_family] | default(_dnsmasq_user['default']) }}"
+dnsmasq_set_user: "{{ _dnsmasq_set_user[ansible_os_family] | default(_dnsmasq_set_user['default']) }}"
 
-_dnsmasq_group:
+_dnsmasq_set_group:
   default: dnsmasq
   Debian: root
   CentOS-7: root
   RedHat: dnsmasq
   Suse: dnsmasq
 
-dnsmasq_group: "{{ _dnsmasq_group[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_dnsmasq_group[ansible_os_family] | default(_dnsmasq_group['default'])) }}"
+dnsmasq_set_group: "{{ _dnsmasq_set_group[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_dnsmasq_set_group[ansible_os_family] | default(_dnsmasq_set_group['default'])) }}"
 
 _dnsmasq_documentation_path:
   default: /usr/share/dnsmasq

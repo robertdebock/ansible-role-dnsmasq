@@ -37,14 +37,14 @@ dnsmasq_no_poll: no
 #       - name: google.com
 #     destination: vpn
 #     option: search
-dnsmasq_user: dnsmasq
-dnsmasq_group: dnsmasq
+dnsmasq_user: "{{ dnsmasq_set_user }}"
+dnsmasq_group: "{{ dnsmasq_set_group }}"
 # dnsmasq_interfaces:
 #   - name: lo
-#  - name: eth0
+#   - name: eth0
 # dnsmasq_except_interface: eth0
-dnsmasq_listen_addresses:
-  - name: 127.0.0.1
+# dnsmasq_listen_addresses:
+#   - name: 127.0.0.1
 dnsmasq_no_dhcp_interface: ""
 dnsmasq_local_service: no
 dnsmasq_bind_interfaces: no
@@ -54,7 +54,7 @@ dnsmasq_expand_hosts: no
 # dnsmasq_domains:
 #   - name: thekelleys.org.uk
 #   - name: wireless.thekelleys.org.uk
-#     subnet: 192.168.2.0/24A
+#     subnet: 192.168.2.0/24
 #   - name: reserved.thekelleys.org.uk
 #     from: 192.68.3.100
 #     until: 192.168.3.200
@@ -125,68 +125,68 @@ dnsmasq_enable_ra: no
 # dnsmasq_dhcp_userclass: set:red,accounts
 dnsmasq_dhcp_mac: "set:red,00:60:8C:*:*:*"
 dnsmasq_read_ethers: no
-dnsmasq_dhcp_options:
-  - name: 3
-    value: 1.2.3.4
-  - name: "option:router"
-    value: 1.2.3.4
-  - name: 3
-  - name: "option:ntp-server"
-    value: 192.168.0.4,10.10.0.5
-  - name: "option6:dns-server"
-    value: "[1234::77],[1234::88]"
-  - name: "option6:dns-server"
-    value: "[::],[1234::88]"
-  - name: option6:information-refresh-time
-    value: 6h
-  - name: "option:T1"
-    value: 1m
-  - name: "option:T2"
-    value: 2m
-  - name: 42
-    value: 0.0.0.0
-  - name: 40
-    value: welly
-  - name: 23
-    value: 50
-  - name: 27
-    value: 1
-  - name: 128
-    value: "e4:45:74:68:00:00"
-  - name: 129
-    value: NIC=eepro100
-  - name: option:ntp-server
-    tag: red
-    value: 192.168.1.1
-  - name: 19
-    value: 0
-  - name: 44
-    value: 0.0.0.0
-  - name: 45
-    value: 0.0.0.0
-  - name: 46
-    value: 8
-  - name: 252
-    value: "\n"
-  - name: "option:domain-search"
-    value: eng.apple.com,marketing.apple.com
-  - name: 121
-    value: 192.168.1.0/24,1.2.3.4,10.0.0.0/8,5.6.7.8
-  - name: "vendor:PXEClient"
-    value: 1,0.0.0.0
-  - name: "vendor:MSFT"
-    value: 2,1i
-  - name: "vendor:Etherboot"
-    value: 60,"Etherboot"
-dnsmasq_dhcp_option_force:
-  - name: 208
-    value: "f1:00:74:7e"
-  - name: 209
-    value: configs/common
-  - name: 210
-    value: /tftpboot/pxelinux/files/
-  - name: 211
-    value: 30i
+# dnsmasq_dhcp_options:
+#   - name: 3
+#     value: 1.2.3.4
+#   - name: "option:router"
+#     value: 1.2.3.4
+#   - name: 3
+#   - name: "option:ntp-server"
+#     value: 192.168.0.4,10.10.0.5
+#   - name: "option6:dns-server"
+#     value: "[1234::77],[1234::88]"
+#   - name: "option6:dns-server"
+#     value: "[::],[1234::88]"
+#   - name: option6:information-refresh-time
+#     value: 6h
+#   - name: "option:T1"
+#     value: 1m
+#   - name: "option:T2"
+#     value: 2m
+#   - name: 42
+#     value: 0.0.0.0
+#   - name: 40
+#     value: welly
+#   - name: 23
+#     value: 50
+#   - name: 27
+#     value: 1
+#   - name: 128
+#     value: "e4:45:74:68:00:00"
+#   - name: 129
+#     value: NIC=eepro100
+#   - name: option:ntp-server
+#     tag: red
+#     value: 192.168.1.1
+#   - name: 19
+#     value: 0
+#   - name: 44
+#     value: 0.0.0.0
+#   - name: 45
+#     value: 0.0.0.0
+#   - name: 46
+#     value: 8
+#   - name: 252
+#     value: "\n"
+#   - name: "option:domain-search"
+#     value: eng.apple.com,marketing.apple.com
+#   - name: 121
+#     value: 192.168.1.0/24,1.2.3.4,10.0.0.0/8,5.6.7.8
+#   - name: "vendor:PXEClient"
+#     value: 1,0.0.0.0
+#   - name: "vendor:MSFT"
+#     value: 2,1i
+#   - name: "vendor:Etherboot"
+#     value: 60,"Etherboot"
+# dnsmasq_dhcp_option_force:
+#   - name: 208
+#     value: "f1:00:74:7e"
+#   - name: 209
+#     value: configs/common
+#   - name: 210
+#     value: /tftpboot/pxelinux/files/
+#   - name: 211
+#     value: 30i
 # dnsmasq_dhcp_boot: pxelinux.0
 # dnsmasq_dhcp_boot: pxelinux.0,server.name,192.168.1.100
 dnsmasq_enable_tftp: no
@@ -205,12 +205,12 @@ dnsmasq_no_negcache: no
 # dnsmasq_bogus_nxdomain: 64.94.110.11
 # dnsmasq_aliases:
 #   - from: 1.2.3.4
-#     to: 4.5.6.7
+#     until: 4.5.6.7
 #   - from: 1.2.3.0
-#     to: 5.6.7.0
+#     until: 5.6.7.0
 #     subnet: 255.255.255.0
 #   - from: 192.168.0.10-192.168.0.40
-#     to: 10.0.0.0
+#     until: 10.0.0.0
 #     subnet: 255.255.255.0
 # dnsmasq_mx_hosts:
 #   - domain: maildomain.com
@@ -234,7 +234,6 @@ dnsmasq_selfmx: no
 #   - record: _ldap._tcp.example.com
 dnsmasq_log_queries: no
 dnsmasq_log_dhcp: no
-# dnsmasq_conf_file: /etc/dnsmasq.more.conf
 # dnsmasq_conf_dir: /etc/dnsmasq.d
 # dnsmasq_dhcp_name_match: set:wpad-ignore,wpad
 # dnsmasq_ignore_names: tag:wpad-ignore
