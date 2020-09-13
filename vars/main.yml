@@ -23,7 +23,7 @@ _dnsmasq_set_group:
   Debian: root
   CentOS-7: root
   RedHat: dnsmasq
-  Suse: dnsmasq
+  Suse: root
 
 dnsmasq_set_group: "{{ _dnsmasq_set_group[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_dnsmasq_set_group[ansible_os_family] | default(_dnsmasq_set_group['default'])) }}"
 
