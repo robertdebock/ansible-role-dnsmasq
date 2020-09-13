@@ -21,7 +21,7 @@ dnsmasq_user: "{{ _dnsmasq_user[ansible_os_family] | default(_dnsmasq_user['defa
 _dnsmasq_group:
   default: dnsmasq
   Debian: root
-  CentOS-7
+  CentOS-7: root
   RedHat: dnsmasq
   Suse: dnsmasq
 
