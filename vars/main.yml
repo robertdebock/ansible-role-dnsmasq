@@ -1,19 +1,31 @@
 ---
 # vars file for dnsmasq
-dnsmasq_packages:
-  - dnsmasq
+_dnsmasq_packages:
+  default:
+    - dnsmasq
+  Alpine:
+    - dnsmasq-dnssec
+
+dnsmasq_packages: "{{ _dnsmasq_packages[ansible_os_family] | default(_dnsmasq_packages['default']) }}"
 
 dnsmasq_service: dnsmasq
 
 dnsmasq_configuration_file: /etc/dnsmasq.conf
 
-dnsmasq_user: root
+_dnsmasq_user:
+  default: root
+  Suse: dnsmasq
+
+dnsmasq_user: "{{ _dnsmasq_user[ansible_os_family] | default(_dnsmasq_user['default']) }}"
+
 _dnsmasq_group:
   default: dnsmasq
-  RedHat: dnsmasq
   Debian: root
+  CentOS-7
+  RedHat: dnsmasq
+  Suse: dnsmasq
 
-dnsmasq_group: "{{ _dnsmasq_group[ansible_os_family] | default(_dnsmasq_group['default']) }}"
+dnsmasq_group: "{{ _dnsmasq_group[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_dnsmasq_group[ansible_os_family] | default(_dnsmasq_group['default'])) }}"
 
 _dnsmasq_documentation_path:
   default: /usr/share/dnsmasq
