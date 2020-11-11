@@ -2,7 +2,7 @@
 - name: test if dnsmasq_port is set correctly
   assert:
     that:
-      - dnsmasq_port | int
+      - dnsmasq_port is number
       - dnsmasq_port | int >= 0
       - dnsmasq_port | int <= 65536
     quiet: yes
@@ -114,7 +114,7 @@
 - name: test if item.port in dnsmasq_servers is set correctly
   assert:
     that:
-      - item.port | int
+      - item.port is number
       - item.port | int >= 0
       - item.port | int <= 65536
     quiet: yes
@@ -561,7 +561,7 @@
 - name: test if dnsmasq_dhcp_lease_max is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_lease_max | int
+      - dnsmasq_dhcp_lease_max is number
       - dnsmasq_dhcp_lease_max | int >= 0
     quiet: yes
   when:
@@ -599,7 +599,7 @@
 - name: test if dnsmasq_cache_size is set correctly
   assert:
     that:
-      - dnsmasq_cache_size | int
+      - dnsmasq_cache_size is number
       - dnsmasq_cache_size | int >= 0
     quiet: yes
   when:
@@ -615,7 +615,7 @@
 - name: test if dnsmasq_local_ttl is set correctly
   assert:
     that:
-      - dnsmasq_local_ttl | int
+      - dnsmasq_local_ttl is number
       - dnsmasq_local_ttl | int >= 0
     quiet: yes
   when:
@@ -731,7 +731,7 @@
       - item.destinatio | length > 0
       - item.port is defined
       - item.port | length > 0
-      - item.port | int
+      - item.port is number
     quiet: yes
   loop: "{{ dnsmasq_src_hosts }}"
   when:
@@ -740,7 +740,7 @@
 - name: test if item.priority in dnsmasq_src_hosts is set correctly
   assert:
     that:
-      - item.priority | int
+      - item.priority is number
       - item.priority | int >= 0
     quiet: yes
   when:
