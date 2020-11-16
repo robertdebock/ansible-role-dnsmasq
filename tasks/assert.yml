@@ -27,7 +27,6 @@
   assert:
     that:
       - dnsmasq_conf_file is defined
-      - dnsmasq_conf_file | length > 0
     quiet: yes
 
 - name: test if dnsmasq_dnssec is set correctly
@@ -54,7 +53,6 @@
 - name: test if dnsmasq_resolv_file is set correctly
   assert:
     that:
-      - dnsmasq_resolv_file | length > 0
     quiet: yes
   when:
     - dnsmasq_resolv_file is defined
@@ -83,7 +81,6 @@
 - name: test if dnsmasq_servers is set correctly
   assert:
     that:
-      - dnsmasq_servers | length > 0
       - dnsmasq_servers is iterable
     quiet: yes
   when:
@@ -93,9 +90,7 @@
   assert:
     that:
       - item.domain is defined
-      - item.domain | length > 0
       - item.nameserver is defined
-      - item.nameserver | length > 0
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -104,7 +99,6 @@
 - name: test if item.interface in dnsmasq_servers is set correctly
   assert:
     that:
-      - item.interface | length > 0
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -126,7 +120,6 @@
 - name: test if dnsmasq_locals is set correctly
   assert:
     that:
-      - dnsmasq_locals | length > 0
       - dnsmasq_locals is iterable
     quiet: yes
   when:
@@ -136,7 +129,6 @@
   assert:
     that:
       - item.domain is defined
-      - item.domain | length > 0
     quiet: yes
   when:
     - dnsmasq_locals is defined
@@ -144,7 +136,6 @@
 - name: test if dnsmasq_addresses is set correctly
   assert:
     that:
-      - dnsmasq_addresses | length > 0
       - dnsmasq_addresses is iterable
     quiet: yes
   when:
@@ -154,9 +145,7 @@
   assert:
     that:
       - item.domain is defined
-      - item.domain | length > 0
       - item.address is defined
-      - item.address | length > 0
     quiet: yes
   loop: "{{ dnsmasq_addresses }}"
   when:
@@ -165,7 +154,6 @@
 - name: test if dnsmasq_ipsets is set correctly
   assert:
     that:
-      - dnsmasq_ipsets | length > 0
       - dnsmasq_ipsets is iterable
     quiet: yes
   when:
@@ -175,12 +163,9 @@
   assert:
     that:
       - item.domains is defined
-      - item.domains | length > 0
       - item.domains is iterable
       - item.destination is defined
-      - item.destination | length > 0
       - item.option is defined
-      - item.option | length > 0
     quiet: yes
   loop: "{{ dnsmasq_ipsets }}"
   when:
@@ -189,7 +174,6 @@
 - name: test if dnsmasq_interfaces is set correctly
   assert:
     that:
-      - dnsmasq_interfaces | length > 0
       - dnsmasq_interfaces is iterable
     quiet: yes
   when:
@@ -199,7 +183,6 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
     quiet: yes
   loop: "{{ dnsmasq_interfaces }}"
   when:
@@ -208,7 +191,6 @@
 - name: test if dnsmasq_except_interface is set correctly
   assert:
     that:
-      - dnsmasq_except_interface | length > 0
     quiet: yes
   when:
     - dnsmasq_except_interface is defined
@@ -216,7 +198,6 @@
 - name: test if dnsmasq_listen_addresses is set correctly
   assert:
     that:
-      - dnsmasq_listen_addresses | length > 0
       - dnsmasq_listen_addresses is iterable
     quiet: yes
   when:
@@ -226,7 +207,6 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
     quiet: yes
   loop: "{{ dnsmasq_listen_addresses }}"
   when:
@@ -262,7 +242,6 @@
 - name: test if dnsmasq_addn_hosts is set correctly
   assert:
     that:
-      - dnsmasq_addn_hosts | length > 0
     quiet: yes
   when:
     - dnsmasq_addn_hosts is defined
@@ -277,7 +256,6 @@
 - name: test if dnsmasq_domains is set correctly
   assert:
     that:
-      - dnsmasq_domains | length > 0
       - dnsmasq_domains is iterable
     quiet: yes
   when:
@@ -287,7 +265,6 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -296,7 +273,6 @@
 - name: test if item.subnet in dnsmasq_domains is set correctly
   assert:
     that:
-      - item.subnet | length > 0
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -306,7 +282,6 @@
 - name: test if item.from in dnsmasq_domains is set correctly
   assert:
     that:
-      - item.from | length > 0
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -316,7 +291,6 @@
 - name: test if item.until in dnsmasq_domains is set correctly
   assert:
     that:
-      - item.until | length > 0
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -326,7 +300,6 @@
 - name: test if dnsmasq_dhcp_ranges is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_ranges | length > 0
       - dnsmasq_dhcp_ranges is iterable
     quiet: yes
   when:
@@ -336,7 +309,6 @@
   assert:
     that:
       - item.from is defined
-      - item.from | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -345,7 +317,6 @@
 - name: test if item.until in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.until | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -355,7 +326,6 @@
 - name: test if item.leasetime in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.leasetime | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -365,7 +335,6 @@
 - name: test if item.subnet in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.subnet | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -375,7 +344,6 @@
 - name: test if item.sets in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.sets | length > 0
       - item.sets is iterabel
     quiet: yes
   when:
@@ -386,7 +354,6 @@
 - name: test if item.tags in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.tags | length > 0
       - item.tags is iterable
     quiet: yes
   when:
@@ -397,7 +364,6 @@
 - name: test if item.options in dnsmasq_dhcp_ranges  is set correctly
   assert:
     that:
-      - item.options | length > 0
       - item.options is iterable
     quiet: yes
   when:
@@ -415,7 +381,6 @@
 - name: test if dnsmasq_hosts is set correctly
   assert:
     that:
-      - dnsmasq_hosts | length > 0
       - dnsmasq_hosts is iterable
     quiet: yes
   when:
@@ -425,9 +390,7 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.value is defined
-      - item.value | length > 0
     quiet: yes
   loop: "{{ dnsmasq_hosts }}"
   when:
@@ -436,7 +399,6 @@
 - name: test if dnsmasq_dhcp_ignore is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_ignore | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_ignore is defined
@@ -444,7 +406,6 @@
 - name: test if dnsmasq_dhcp_vendorclass is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_vendorclass | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_vendorclass is defined
@@ -452,7 +413,6 @@
 - name: test if dnsmasq_dhcp_userclass is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_userclass | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_userclass is defined
@@ -460,7 +420,6 @@
 - name: test if dnsmasq_dhcp_mac is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_mac | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_mac is defined
@@ -475,7 +434,6 @@
 - name: test if dnsmasq_dhcp_options is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_options | length > 0
       - dnsmasq_dhcp_options is iterable
     quiet: yes
   when:
@@ -485,9 +443,7 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.value is defined
-      - item.value | length > 0
     quiet: yes
   loop: "{{ dnsmasq_dhcp_options }}"
   when:
@@ -496,7 +452,6 @@
 - name: test if dnsmasq_dhcp_option_force is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_option_force | length > 0
       - dnsmasq_dhcp_option_force is iterable
     quiet: yes
   when:
@@ -506,9 +461,7 @@
   assert:
     that:
       - item.name is defined
-      - item.name | length > 0
       - item.value is defined
-      - item.value | length > 0
     quiet: yes
   loop: "{{ dnsmasq_dhcp_option_force }}"
   when:
@@ -517,7 +470,6 @@
 - name: test if dnsmasq_dhcp_boot is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_boot | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_boot is defined
@@ -532,7 +484,6 @@
 - name: test if dnsmasq_tftp_root is set correctly
   assert:
     that:
-      - dnsmasq_tftp_root | length > 0
     quiet: yes
   when:
     - dnsmasq_tftp_root is defined
@@ -570,7 +521,6 @@
 - name: test if dnsmasq_dhcp_leasefile is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_leasefile | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_leasefile is defined
@@ -593,7 +543,6 @@
   assert:
     that:
       - dnsmasq_dhcp_script is defined
-      - dnsmasq_dhcp_script | length > 0
     quiet: yes
 
 - name: test if dnsmasq_cache_size is set correctly
@@ -624,7 +573,6 @@
 - name: test if dnsmasq_bogus_nxdomain is set correctly
   assert:
     that:
-      - dnsmasq_bogus_nxdomain | length > 0
     quiet: yes
   when:
     - dnsmasq_bogus_nxdomain is defined
@@ -632,7 +580,6 @@
 - name: test if dnsmasq_aliases is set correctly
   assert:
     that:
-      - dnsmasq_aliases | length > 0
       - dnsmasq_aliases is iterable
     quiet: yes
   when:
@@ -642,9 +589,7 @@
   assert:
     that:
       - item.from is defined
-      - item.from | length > 0
       - item.until is defined
-      - item.until | length > 0
     quiet: yes
   loop: "{{ dnsmasq_aliases }}"
   when:
@@ -653,7 +598,6 @@
 - name: test if item.subnet in dnsmasq_aliases is set correctly
   assert:
     that:
-      - item.subnet | length > 0
     quiet: yes
   loop: "{{ dnsmasq_aliases }}"
   when:
@@ -663,7 +607,6 @@
 - name: test if dnsmasq_mx_hosts is set correctly
   assert:
     that:
-      - dnsmasq_mx_hosts | length > 0
       - dnsmasq_mx_hosts is iterable
     quiet: yes
   when:
@@ -673,7 +616,6 @@
   assert:
     that:
       - item.domain is defined
-      - item.domain | length > 0
     quiet: yes
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
@@ -682,7 +624,6 @@
 - name: test if item.host in dnsmasq_mx_hosts is set correctly
   assert:
     that:
-      - item.host | length > 0
     quiet: yes
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
@@ -692,7 +633,6 @@
 - name: test if item.prority in dnsmasq_mx_hosts is set correctly
   assert:
     that:
-      - item.prority | length > 0
     quiet: yes
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
@@ -716,7 +656,6 @@
 - name: test if dnsmasq_src_hosts is set correctly
   assert:
     that:
-      - dnsmasq_src_hosts | length > 0
       - dnsmasq_src_hosts is iterable
     quiet: yes
   when:
@@ -726,11 +665,8 @@
   assert:
     that:
       - item.record is defined
-      - item.record | length > 0
       - item.destinatio is defined
-      - item.destinatio | length > 0
       - item.port is defined
-      - item.port | length > 0
       - item.port is number
     quiet: yes
   loop: "{{ dnsmasq_src_hosts }}"
@@ -764,7 +700,6 @@
 - name: test if dnsmasq_conf_dir is set correctly
   assert:
     that:
-      - dnsmasq_conf_dir | length > 0
     quiet: yes
   when:
     - dnsmasq_conf_dir is defined
@@ -772,7 +707,6 @@
 - name: test if dnsmasq_dhcp_name_match is set correctly
   assert:
     that:
-      - dnsmasq_dhcp_name_match | length > 0
     quiet: yes
   when:
     - dnsmasq_dhcp_name_match is defined
@@ -780,7 +714,6 @@
 - name: test if dnsmasq_ignore_names is set correctly
   assert:
     that:
-      - dnsmasq_ignore_names | length > 0
     quiet: yes
   when:
     - dnsmasq_ignore_names is defined
