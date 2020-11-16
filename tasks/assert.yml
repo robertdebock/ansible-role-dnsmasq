@@ -3,8 +3,8 @@
   assert:
     that:
       - dnsmasq_port is number
-      - dnsmasq_port | int >= 0
-      - dnsmasq_port | int <= 65536
+      - dnsmasq_port >= 0
+      - dnsmasq_port <= 65536
     quiet: yes
   when:
     - dnsmasq_port is defined
@@ -109,8 +109,8 @@
   assert:
     that:
       - item.port is number
-      - item.port | int >= 0
-      - item.port | int <= 65536
+      - item.port >= 0
+      - item.port <= 65536
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -513,7 +513,7 @@
   assert:
     that:
       - dnsmasq_dhcp_lease_max is number
-      - dnsmasq_dhcp_lease_max | int >= 0
+      - dnsmasq_dhcp_lease_max >= 0
     quiet: yes
   when:
     - dnsmasq_dhcp_lease_max is defined
@@ -549,7 +549,7 @@
   assert:
     that:
       - dnsmasq_cache_size is number
-      - dnsmasq_cache_size | int >= 0
+      - dnsmasq_cache_size >= 0
     quiet: yes
   when:
     - dnsmasq_cache_size is defined
@@ -565,7 +565,7 @@
   assert:
     that:
       - dnsmasq_local_ttl is number
-      - dnsmasq_local_ttl | int >= 0
+      - dnsmasq_local_ttl >= 0
     quiet: yes
   when:
     - dnsmasq_local_ttl is defined
@@ -677,7 +677,7 @@
   assert:
     that:
       - item.priority is number
-      - item.priority | int >= 0
+      - item.priority >= 0
     quiet: yes
   when:
     - dnsmasq_src_hosts is defined
