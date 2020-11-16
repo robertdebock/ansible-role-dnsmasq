@@ -50,13 +50,6 @@
       - dnsmasq_filterwin2k is boolean
     quiet: yes
 
-- name: test if dnsmasq_resolv_file is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_resolv_file is defined
-
 - name: test if dnsmasq_strict_order is set correctly
   assert:
     that:
@@ -95,15 +88,6 @@
   loop: "{{ dnsmasq_servers }}"
   when:
     - dnsmasq_servers is defined
-
-- name: test if item.interface in dnsmasq_servers is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_servers }}"
-  when:
-    - dnsmasq_servers is defined
-    - item.interface is defined
 
 - name: test if item.port in dnsmasq_servers is set correctly
   assert:
@@ -188,13 +172,6 @@
   when:
     - dnsmasq_interfaces is defined
 
-- name: test if dnsmasq_except_interface is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_except_interface is defined
-
 - name: test if dnsmasq_listen_addresses is set correctly
   assert:
     that:
@@ -239,13 +216,6 @@
       - dnsmasq_no_hosts is boolean
     quiet: yes
 
-- name: test if dnsmasq_addn_hosts is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_addn_hosts is defined
-
 - name: test if dnsmasq_expand_hosts is set correctly
   assert:
     that:
@@ -270,33 +240,6 @@
   when:
     - dnsmasq_domains is defined
 
-- name: test if item.subnet in dnsmasq_domains is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_domains }}"
-  when:
-    - dnsmasq_domains is defined
-    - item.subnet is defined
-
-- name: test if item.from in dnsmasq_domains is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_domains }}"
-  when:
-    - dnsmasq_domains is defined
-    - item.from is defined
-
-- name: test if item.until in dnsmasq_domains is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_domains }}"
-  when:
-    - dnsmasq_domains is defined
-    - item.until is defined
-
 - name: test if dnsmasq_dhcp_ranges is set correctly
   assert:
     that:
@@ -314,32 +257,6 @@
     - dnsmasq_dhcp_ranges is defined
   loop: "{{ dnsmasq_dhcp_ranges }}"
 
-- name: test if item.until in dnsmasq_dhcp_ranges  is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_ranges is defined
-    - item.until is defined
-  loop: "{{ dnsmasq_dhcp_ranges }}"
-
-- name: test if item.leasetime in dnsmasq_dhcp_ranges  is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_ranges is defined
-    - item.leasetime is defined
-  loop: "{{ dnsmasq_dhcp_ranges }}"
-
-- name: test if item.subnet in dnsmasq_dhcp_ranges  is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_ranges is defined
-    - item.subnet is defined
-  loop: "{{ dnsmasq_dhcp_ranges }}"
 
 - name: test if item.sets in dnsmasq_dhcp_ranges  is set correctly
   assert:
@@ -396,34 +313,6 @@
   when:
     - dnsmasq_hosts is defined
 
-- name: test if dnsmasq_dhcp_ignore is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_ignore is defined
-
-- name: test if dnsmasq_dhcp_vendorclass is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_vendorclass is defined
-
-- name: test if dnsmasq_dhcp_userclass is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_userclass is defined
-
-- name: test if dnsmasq_dhcp_mac is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_mac is defined
-
 - name: test if dnsmasq_read_ethers is set correctly
   assert:
     that:
@@ -467,26 +356,12 @@
   when:
     - dnsmasq_dhcp_option_force is defined
 
-- name: test if dnsmasq_dhcp_boot is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_boot is defined
-
 - name: test if dnsmasq_enable_tftp is set correctly
   assert:
     that:
       - dnsmasq_enable_tftp is defined
       - dnsmasq_enable_tftp is boolean
     quiet: yes
-
-- name: test if dnsmasq_tftp_root is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_tftp_root is defined
 
 - name: test if dnsmasq_tftp_no_fail is set correctly
   assert:
@@ -517,13 +392,6 @@
     quiet: yes
   when:
     - dnsmasq_dhcp_lease_max is defined
-
-- name: test if dnsmasq_dhcp_leasefile is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_leasefile is defined
 
 - name: test if dnsmasq_dhcp_authoritative is set correctly
   assert:
@@ -570,13 +438,6 @@
   when:
     - dnsmasq_local_ttl is defined
 
-- name: test if dnsmasq_bogus_nxdomain is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_bogus_nxdomain is defined
-
 - name: test if dnsmasq_aliases is set correctly
   assert:
     that:
@@ -595,15 +456,6 @@
   when:
     - dnsmasq_aliases is defined
 
-- name: test if item.subnet in dnsmasq_aliases is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_aliases }}"
-  when:
-    - dnsmasq_aliases is defined
-    - item.subnet is defined
-
 - name: test if dnsmasq_mx_hosts is set correctly
   assert:
     that:
@@ -620,24 +472,6 @@
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
     - dnsmasq_mx_hosts is defined
-
-- name: test if item.host in dnsmasq_mx_hosts is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_mx_hosts }}"
-  when:
-    - dnsmasq_mx_hosts is defined
-    - item.host is defined
-
-- name: test if item.prority in dnsmasq_mx_hosts is set correctly
-  assert:
-    that:
-    quiet: yes
-  loop: "{{ dnsmasq_mx_hosts }}"
-  when:
-    - dnsmasq_mx_hosts is defined
-    - item.prority is defined
 
 - name: test if dnsmasq_localmx is set correctly
   assert:
@@ -696,24 +530,3 @@
       - dnsmasq_log_dhcp is defined
       - dnsmasq_log_dhcp is boolean
     quiet: yes
-
-- name: test if dnsmasq_conf_dir is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_conf_dir is defined
-
-- name: test if dnsmasq_dhcp_name_match is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_dhcp_name_match is defined
-
-- name: test if dnsmasq_ignore_names is set correctly
-  assert:
-    that:
-    quiet: yes
-  when:
-    - dnsmasq_ignore_names is defined
