@@ -13,14 +13,14 @@
   assert:
     that:
       - dnsmasq_domain_needed is defined
-      - dnsmasq_domain_needed | type_debug == "bool"
+      - dnsmasq_domain_needed is boolean
     quiet: yes
 
 - name: test if dnsmasq_bogus_priv is set correctly
   assert:
     that:
       - dnsmasq_bogus_priv is defined
-      - dnsmasq_bogus_priv | type_debug == "bool"
+      - dnsmasq_bogus_priv is boolean
     quiet: yes
 
 - name: test if dnsmasq_conf_file is set correctly
@@ -34,21 +34,21 @@
   assert:
     that:
       - dnsmasq_dnssec is defined
-      - dnsmasq_dnssec | type_debug == "bool"
+      - dnsmasq_dnssec is boolean
     quiet: yes
 
 - name: test if dnsmasq_dnssec_check_unsigned is set correctly
   assert:
     that:
       - dnsmasq_dnssec_check_unsigned is defined
-      - dnsmasq_dnssec_check_unsigned | type_debug == "bool"
+      - dnsmasq_dnssec_check_unsigned is boolean
     quiet: yes
 
 - name: test if dnsmasq_filterwin2k is set correctly
   assert:
     that:
       - dnsmasq_filterwin2k is defined
-      - dnsmasq_filterwin2k | type_debug == "bool"
+      - dnsmasq_filterwin2k is boolean
     quiet: yes
 
 - name: test if dnsmasq_resolv_file is set correctly
@@ -63,21 +63,21 @@
   assert:
     that:
       - dnsmasq_strict_order is defined
-      - dnsmasq_strict_order | type_debug == "bool"
+      - dnsmasq_strict_order is boolean
     quiet: yes
 
 - name: test if dnsmasq_no_resolv is set correctly
   assert:
     that:
       - dnsmasq_no_resolv is defined
-      - dnsmasq_no_resolv | type_debug == "bool"
+      - dnsmasq_no_resolv is boolean
     quiet: yes
 
 - name: test if dnsmasq_no_poll is set correctly
   assert:
     that:
       - dnsmasq_no_poll is defined
-      - dnsmasq_no_poll | type_debug == "bool"
+      - dnsmasq_no_poll is boolean
     quiet: yes
 
 - name: test if dnsmasq_servers is set correctly
@@ -242,21 +242,21 @@
   assert:
     that:
       - dnsmasq_local_service is defined
-      - dnsmasq_local_service | type_debug == "bool"
+      - dnsmasq_local_service is boolean
     quiet: yes
 
 - name: test if dnsmasq_bind_interfaces is set correctly
   assert:
     that:
       - dnsmasq_bind_interfaces is defined
-      - dnsmasq_bind_interfaces | type_debug == "bool"
+      - dnsmasq_bind_interfaces is boolean
     quiet: yes
 
 - name: test if dnsmasq_no_hosts is set correctly
   assert:
     that:
       - dnsmasq_no_hosts is defined
-      - dnsmasq_no_hosts | type_debug == "bool"
+      - dnsmasq_no_hosts is boolean
     quiet: yes
 
 - name: test if dnsmasq_addn_hosts is set correctly
@@ -271,7 +271,7 @@
   assert:
     that:
       - dnsmasq_expand_hosts is defined
-      - dnsmasq_expand_hosts | type_debug == "bool"
+      - dnsmasq_expand_hosts is boolean
     quiet: yes
 
 - name: test if dnsmasq_domains is set correctly
@@ -409,7 +409,7 @@
   assert:
     that:
       - dnsmasq_enable_ra is defined
-      - dnsmasq_enable_ra | type_debug == "bool"
+      - dnsmasq_enable_ra is boolean
     quiet: yes
 
 - name: test if dnsmasq_hosts is set correctly
@@ -469,7 +469,7 @@
   assert:
     that:
       - dnsmasq_read_ethers is defined
-      - dnsmasq_read_ethers | type_debug == "bool"
+      - dnsmasq_read_ethers is boolean
     quiet: yes
 
 - name: test if dnsmasq_dhcp_options is set correctly
@@ -526,7 +526,7 @@
   assert:
     that:
       - dnsmasq_enable_tftp is defined
-      - dnsmasq_enable_tftp | type_debug == "bool"
+      - dnsmasq_enable_tftp is boolean
     quiet: yes
 
 - name: test if dnsmasq_tftp_root is set correctly
@@ -541,21 +541,21 @@
   assert:
     that:
       - dnsmasq_tftp_no_fail is defined
-      - dnsmasq_tftp_no_fail | type_debug == "bool"
+      - dnsmasq_tftp_no_fail is boolean
     quiet: yes
 
 - name: test if dnsmasq_tftp_secure is set correctly
   assert:
     that:
       - dnsmasq_tftp_secure is defined
-      - dnsmasq_tftp_secure | type_debug == "bool"
+      - dnsmasq_tftp_secure is boolean
     quiet: yes
 
 - name: test if dnsmasq_tftp_no_blocksize is set correctly
   assert:
     that:
       - dnsmasq_tftp_no_blocksize is defined
-      - dnsmasq_tftp_no_blocksize | type_debug == "bool"
+      - dnsmasq_tftp_no_blocksize is boolean
     quiet: yes
 
 - name: test if dnsmasq_dhcp_lease_max is set correctly
@@ -579,14 +579,14 @@
   assert:
     that:
       - dnsmasq_dhcp_authoritative is defined
-      - dnsmasq_dhcp_authoritative | type_debug == "bool"
+      - dnsmasq_dhcp_authoritative is boolean
     quiet: yes
 
 - name: test if dnsmasq_dhcp_rapid_commit is set correctly
   assert:
     that:
       - dnsmasq_dhcp_rapid_commit is defined
-      - dnsmasq_dhcp_rapid_commit | type_debug == "bool"
+      - dnsmasq_dhcp_rapid_commit is boolean
     quiet: yes
 
 - name: test if dnsmasq_dhcp_script is set correctly
@@ -609,7 +609,7 @@
   assert:
     that:
       - dnsmasq_no_negcache is defined
-      - dnsmasq_no_negcache | type_debug == "bool"
+      - dnsmasq_no_negcache is boolean
     quiet: yes
 
 - name: test if dnsmasq_local_ttl is set correctly
@@ -703,14 +703,14 @@
   assert:
     that:
       - dnsmasq_localmx is defined
-      - dnsmasq_localmx | type_debug == "bool"
+      - dnsmasq_localmx is boolean
     quiet: yes
 
 - name: test if dnsmasq_selfmx is set correctly
   assert:
     that:
       - dnsmasq_selfmx is defined
-      - dnsmasq_selfmx | type_debug == "bool"
+      - dnsmasq_selfmx is boolean
     quiet: yes
 
 - name: test if dnsmasq_src_hosts is set correctly
@@ -751,14 +751,14 @@
   assert:
     that:
       - dnsmasq_log_queries is defined
-      - dnsmasq_log_queries | type_debug == "bool"
+      - dnsmasq_log_queries is boolean
     quiet: yes
 
 - name: test if dnsmasq_log_dhcp is set correctly
   assert:
     that:
       - dnsmasq_log_dhcp is defined
-      - dnsmasq_log_dhcp | type_debug == "bool"
+      - dnsmasq_log_dhcp is boolean
     quiet: yes
 
 - name: test if dnsmasq_conf_dir is set correctly
