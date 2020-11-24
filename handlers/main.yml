@@ -1,5 +1,6 @@
 ---
 # handlers file for dnsmasq
+
 - name: test dnsmasq configuration
   command: dnsmasq --test
 
@@ -7,3 +8,5 @@
   service:
     name: "{{ dnsmasq_service }}"
     state: restarted
+  when:
+    - not ansible_check_mode | bool
