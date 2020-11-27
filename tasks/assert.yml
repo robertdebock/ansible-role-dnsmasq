@@ -28,6 +28,7 @@
   assert:
     that:
       - dnsmasq_conf_file is defined
+      - dnsmasq_conf_file is string
     quiet: yes
 
 - name: test if dnsmasq_dnssec is set correctly
@@ -84,7 +85,9 @@
   assert:
     that:
       - item.domain is defined
+      - item.domain is string
       - item.nameserver is defined
+      - item.nameserver is string
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -114,6 +117,7 @@
   assert:
     that:
       - item.domain is defined
+      - item.domain is string
     quiet: yes
   when:
     - dnsmasq_locals is defined
@@ -130,7 +134,9 @@
   assert:
     that:
       - item.domain is defined
+      - item.domain is string
       - item.address is defined
+      - item.address is string
     quiet: yes
   loop: "{{ dnsmasq_addresses }}"
   when:
@@ -150,7 +156,9 @@
       - item.domains is defined
       - item.domains is iterable
       - item.destination is defined
+      - item.destination is string
       - item.option is defined
+      - item.option is string
     quiet: yes
   loop: "{{ dnsmasq_ipsets }}"
   when:
@@ -168,6 +176,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ dnsmasq_interfaces }}"
   when:
@@ -180,11 +189,13 @@
     quiet: yes
   when:
     - dnsmasq_listen_addresses is defined
+    - dnsmasq_listen_addresses is string
 
 - name: test if item in dnsmasq_listen_addresses is set correctly
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ dnsmasq_listen_addresses }}"
   when:
@@ -194,6 +205,7 @@
   assert:
     that:
       - dnsmasq_no_dhcp_interface is defined
+      - dnsmasq_no_dhcp_interface is string
     quiet: yes
 
 - name: test if dnsmasq_local_service is set correctly
@@ -236,6 +248,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -253,6 +266,7 @@
   assert:
     that:
       - item.from is defined
+      - item.from is string
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -308,6 +322,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.value is defined
     quiet: yes
   loop: "{{ dnsmasq_hosts }}"
@@ -333,6 +348,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.value is defined
     quiet: yes
   loop: "{{ dnsmasq_dhcp_options }}"
@@ -351,6 +367,7 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.value is defined
     quiet: yes
   loop: "{{ dnsmasq_dhcp_option_force }}"
@@ -412,6 +429,7 @@
   assert:
     that:
       - dnsmasq_dhcp_script is defined
+      - dnsmasq_dhcp_script is string
     quiet: yes
 
 - name: test if dnsmasq_cache_size is set correctly
@@ -451,7 +469,9 @@
   assert:
     that:
       - item.from is defined
+      - item.from is string
       - item.until is defined
+      - item.until is string
     quiet: yes
   loop: "{{ dnsmasq_aliases }}"
   when:
@@ -469,6 +489,7 @@
   assert:
     that:
       - item.domain is defined
+      - item.domain is string
     quiet: yes
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
@@ -500,7 +521,9 @@
   assert:
     that:
       - item.record is defined
-      - item.destinatio is defined
+      - item.record is string
+      - item.destination is defined
+      - item.destination is string
       - item.port is defined
       - item.port is number
     quiet: yes
