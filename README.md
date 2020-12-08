@@ -2,9 +2,9 @@
 
 Install and configure dnsmasq on your system.
 
-|Travis|GitHub|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-dnsmasq.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-dnsmasq)|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![quality](https://img.shields.io/ansible/quality/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
+|Travis|GitHub|GitLab|Quality|Downloads|Version|
+|------|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-dnsmasq.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-dnsmasq)|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-dnsmasq/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-dnsmasq)|[![quality](https://img.shields.io/ansible/quality/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
