@@ -5,7 +5,7 @@
   command: dnsmasq --test
 
 - name: restart dnsmasq
-  service:
+  ansible.builtin.service:
     name: "{{ dnsmasq_service }}"
     state: restarted
   when:

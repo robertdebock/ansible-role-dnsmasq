@@ -7,12 +7,12 @@
   delegate_to: localhost
 
 - name: install dnsmasq
-  package:
+  ansible.builtin.package:
     name: "{{ dnsmasq_packages }}"
     state: present
 
 - name: configure dnsmasq
-  template:
+  ansible.builtin.template:
     src: dnsmasq.conf.j2
     dest: "{{ dnsmasq_configuration_file }}"
     owner: "{{ dnsmasq_user }}"
@@ -23,7 +23,7 @@
     - restart dnsmasq
 
 - name: start and enable dnsmasq
-  service:
+  ansible.builtin.service:
     name: "{{ dnsmasq_service }}"
     state: started
     enabled: yes
