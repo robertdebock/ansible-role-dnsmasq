@@ -4,7 +4,7 @@ Install and configure dnsmasq on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq)|[![quality](https://img.shields.io/ansible/quality/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -286,7 +286,7 @@ dnsmasq_log_dhcp: no
 
 - pip packages listed in [requirements.txt](https://github.com/robertdebock/ansible-role-dnsmasq/blob/master/requirements.txt).
 
-## [Status of used roles](#status-of-requirements)
+## [State of used roles](#state-of-used-roles)
 
 The following roles are used to prepare a system. You can prepare your system in another way.
 
