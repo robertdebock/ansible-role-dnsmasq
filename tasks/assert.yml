@@ -29,6 +29,7 @@
     that:
       - dnsmasq_conf_file is defined
       - dnsmasq_conf_file is string
+      - dnsmasq_conf_file is not none
     quiet: yes
 
 - name: assert | Test if dnsmasq_dnssec is set correctly
@@ -86,6 +87,7 @@
     that:
       - item.nameserver is defined
       - item.nameserver is string
+      - item.nameserver is not none
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -95,6 +97,7 @@
   ansible.builtin.assert:
     that:
       - item.domain is string
+      - item.domain is not none
     quiet: yes
   loop: "{{ dnsmasq_servers }}"
   when:
@@ -126,6 +129,7 @@
     that:
       - item.domain is defined
       - item.domain is string
+      - item.domain is not none
     quiet: yes
   when:
     - dnsmasq_locals is defined
@@ -143,8 +147,10 @@
     that:
       - item.domain is defined
       - item.domain is string
+      - item.domain is not none
       - item.address is defined
       - item.address is string
+      - item.address is not none
     quiet: yes
   loop: "{{ dnsmasq_addresses }}"
   when:
@@ -165,8 +171,10 @@
       - item.domains is iterable
       - item.destination is defined
       - item.destination is string
+      - item.destination is not none
       - item.option is defined
       - item.option is string
+      - item.option is not none
     quiet: yes
   loop: "{{ dnsmasq_ipsets }}"
   when:
@@ -185,6 +193,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ dnsmasq_interfaces }}"
   when:
@@ -204,6 +213,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ dnsmasq_listen_addresses }}"
   when:
@@ -214,6 +224,7 @@
     that:
       - dnsmasq_no_dhcp_interface is defined
       - dnsmasq_no_dhcp_interface is string
+      - dnsmasq_no_dhcp_interface is not none
     quiet: yes
 
 - name: assert | Test if dnsmasq_local_service is set correctly
@@ -257,6 +268,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
     quiet: yes
   loop: "{{ dnsmasq_domains }}"
   when:
@@ -275,6 +287,7 @@
     that:
       - item.from is defined
       - item.from is string
+      - item.from is not none
     quiet: yes
   when:
     - dnsmasq_dhcp_ranges is defined
@@ -330,7 +343,9 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
       - item.value is defined
+      - item.value is not none
     quiet: yes
   loop: "{{ dnsmasq_hosts }}"
   when:
@@ -356,7 +371,9 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
       - item.value is defined
+      - item.value is not none
     quiet: yes
   loop: "{{ dnsmasq_dhcp_options }}"
   when:
@@ -375,7 +392,9 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
       - item.value is defined
+      - item.value is not none
     quiet: yes
   loop: "{{ dnsmasq_dhcp_option_force }}"
   when:
@@ -437,6 +456,7 @@
     that:
       - dnsmasq_dhcp_script is defined
       - dnsmasq_dhcp_script is string
+      - dnsmasq_dhcp_script is not none
     quiet: yes
 
 - name: assert | Test if dnsmasq_cache_size is set correctly
@@ -477,8 +497,10 @@
     that:
       - item.from is defined
       - item.from is string
+      - item.from is not none
       - item.until is defined
       - item.until is string
+      - item.until is not none
     quiet: yes
   loop: "{{ dnsmasq_aliases }}"
   when:
@@ -497,6 +519,7 @@
     that:
       - item.domain is defined
       - item.domain is string
+      - item.domain is not none
     quiet: yes
   loop: "{{ dnsmasq_mx_hosts }}"
   when:
@@ -529,8 +552,10 @@
     that:
       - item.record is defined
       - item.record is string
+      - item.record is not none
       - item.destination is defined
       - item.destination is string
+      - item.destination is not none
       - item.port is defined
       - item.port is number
     quiet: yes
