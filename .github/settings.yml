@@ -5,4 +5,4 @@
 repository:
   description: Install and configure dnsmasq on your system.
   homepage: https://robertdebock.nl/
-  topics: dnsmasq, dns, dhcp, ansible, molecule, tox, playbook
+  topics: dnsmasq, dns, dhcp, system, ansible, molecule, tox, playbook
