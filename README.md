@@ -2,9 +2,9 @@
 
 Install and configure dnsmasq on your system.
 
-|GitHub|GitLab|Quality|Downloads|Version|
-|------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq)|[![quality](https://img.shields.io/ansible/quality/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/50704)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
+|GitHub|GitLab|Downloads|Version|
+|------|------|---------|-------|
+|[![github](https://github.com/robertdebock/ansible-role-dnsmasq/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-dnsmasq)|[![downloads](https://img.shields.io/ansible/role/d/24478)](https://galaxy.ansible.com/robertdebock/dnsmasq)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-dnsmasq.svg)](https://github.com/robertdebock/ansible-role-dnsmasq/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -319,7 +319,7 @@ The minimum version of Ansible required is 2.12, tests have been done to:
 - The current version.
 - The development version.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-dnsmasq/issues)
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-dnsmasq/issues).
 
 ## [License](#license)
 
