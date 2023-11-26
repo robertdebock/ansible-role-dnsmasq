@@ -1,4 +1,4 @@
-# Ansible role [dnsmasq](#dnsmasq)
+# [Ansible role dnsmasq](#dnsmasq)
 
 Install and configure dnsmasq on your system.
 
