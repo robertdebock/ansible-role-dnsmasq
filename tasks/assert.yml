@@ -131,6 +131,7 @@
       - item.domain is string
       - item.domain is not none
     quiet: true
+  loop: "{{ dnsmasq_locals }}"
   when:
     - dnsmasq_locals is defined
 
@@ -569,6 +570,7 @@
       - item.priority is number
       - item.priority >= 0
     quiet: true
+  loop: "{{ dnsmasq_src_hosts }}"
   when:
     - dnsmasq_src_hosts is defined
     - item.priority is defined
