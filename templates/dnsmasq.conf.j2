@@ -875,9 +875,9 @@ selfmx
 # A SRV record indicating that there is no LDAP server for the domain
 # example.com
 #srv-host=_ldap._tcp.example.com
-{% if dnsmasq_src_hosts is defined %}
-{% for item in dnsmasq_src_hosts %}
-src-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
+{% if dnsmasq_srv_hosts is defined %}
+{% for item in dnsmasq_srv_hosts %}
+srv-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
 
 {% endfor %}
 {% endif %}
