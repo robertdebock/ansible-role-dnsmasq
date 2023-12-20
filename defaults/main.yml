@@ -219,7 +219,7 @@ dnsmasq_no_negcache: no
 #   - domain: servermachine.com
 dnsmasq_localmx: no
 dnsmasq_selfmx: no
-# dnsmasq_src_hosts:
+# dnsmasq_srv_hosts:
 #   - record: _ldap._tcp.example.com
 #     destination: ldapserver.example.com
 #     port: 389
