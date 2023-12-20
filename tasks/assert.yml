@@ -455,10 +455,11 @@
 - name: assert | Test dnsmasq_dhcp_script
   ansible.builtin.assert:
     that:
-      - dnsmasq_dhcp_script is defined
       - dnsmasq_dhcp_script is string
       - dnsmasq_dhcp_script is not none
     quiet: true
+  when:
+    - dnsmasq_dhcp_script is defined
 
 - name: assert | Test dnsmasq_cache_size
   ansible.builtin.assert:

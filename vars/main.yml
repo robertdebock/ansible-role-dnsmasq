@@ -10,7 +10,11 @@ dnsmasq_packages: "{{ _dnsmasq_packages[ansible_os_family] | default(_dnsmasq_pa
 
 dnsmasq_service: dnsmasq
 
-dnsmasq_configuration_file: /etc/dnsmasq.conf
+_dnsmasq_configuration_file:
+  default: /etc/dnsmasq.conf
+  FreeBSD: /usr/local/etc/dnsmasq.conf
+
+dnsmasq_configuration_file: "{{ _dnsmasq_configuration_file[ansible_os_family] | default(_dnsmasq_configuration_file['default']) }}"
 
 _dnsmasq_set_user:
   default: root
@@ -24,6 +28,7 @@ _dnsmasq_set_group:
   CentOS-7: root
   RedHat: dnsmasq
   Suse: root
+  FreeBSD: network
 
 dnsmasq_set_group: "{{ _dnsmasq_set_group[ansible_distribution ~ '-' ~ ansible_distribution_major_version] | default(_dnsmasq_set_group[ansible_os_family] | default(_dnsmasq_set_group['default'] )) }}"
 
@@ -31,5 +36,6 @@ _dnsmasq_documentation_path:
   default: /usr/share/dnsmasq
   Debian: /usr/share/dnsmasq-base
   RedHat: /usr/share/dnsmasq
+  FreeBSD: /usr/local/share/dnsmasq
 
 dnsmasq_documentation_path: "{{ _dnsmasq_documentation_path[ansible_os_family] | default(_dnsmasq_documentation_path['default']) }}"
