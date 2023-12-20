@@ -35,7 +35,7 @@ bogus-priv
 
 # Uncomment these to enable DNSSEC validation and caching:
 # (Requires dnsmasq to be built with DNSSEC option.)
-{% if dnsmasq_dnssec is defined and dnsmasq_dnssec %}
+{% if dnsmasq_dnssec is defined and dnsmasq_dnssec and dnsmasq_conf_file is defined %}
 conf-file={{ dnsmasq_conf_file }}
 dnssec
 {% else %}
@@ -264,7 +264,7 @@ expand-hosts
 #domain=reserved.thekelleys.org.uk,192.68.3.100,192.168.3.200
 {% if dnsmasq_domains is defined %}
 {% for item in dnsmasq_domains %}
-domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
+domain={{ item.name }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
 
 {% endfor %}
 {% endif %}
@@ -920,7 +920,7 @@ log-dhcp
 {% endif %}
 
 # Include another lot of configuration options.
-{% if dnsmasq_conf_file is defined %}
+{% if dnsmasq_dnssec is not defined and dnsmasq_conf_file is defined %}
 conf-file={{ dnsmasq_conf_file }}
 {% else %}
 #conf-file=/etc/dnsmasq.more.conf
