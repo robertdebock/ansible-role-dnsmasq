@@ -131,6 +131,7 @@
       - item.domain is string
       - item.domain is not none
     quiet: yes
+  loop: "{{ dnsmasq_locals }}"
   when:
     - dnsmasq_locals is defined
 
