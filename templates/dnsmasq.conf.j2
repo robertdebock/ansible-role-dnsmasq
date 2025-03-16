@@ -264,7 +264,7 @@ expand-hosts
 #domain=reserved.thekelleys.org.uk,192.68.3.100,192.168.3.200
 {% if dnsmasq_domains is defined %}
 {% for item in dnsmasq_domains %}
-domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
+domain={{ item.name }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
 
 {% endfor %}
 {% endif %}
