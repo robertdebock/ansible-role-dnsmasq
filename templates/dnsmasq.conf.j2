@@ -235,7 +235,9 @@ no-hosts
 # or if you want it to read another file, as well as /etc/hosts, use
 # this.
 {% if dnsmasq_addn_hosts is defined %}
-addn-hosts={{ dnsmasq_addn_hosts }}
+{% for item in dnsmasq_addn_hosts %}
+addn-hosts={{ item }}
+{% endfor %}
 {% else %}
 #addn-hosts=/etc/banner_add_hosts
 {% endif %}
