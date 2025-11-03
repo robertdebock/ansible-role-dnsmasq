@@ -434,7 +434,7 @@ dhcp-ignore={{ dnsmasq_dhcp_ignore }}
 # Send extra options which are tagged as "red" to any machine whose
 # DHCP vendorclass string includes the substring "Linux"
 {% if dnsmasq_dhcp_vendorclass is defined %}
-#dhcp-vendorclass=set:red,Linux
+dhcp-vendorclass={{ dnsmasq_dhcp_vendorclass }}
 {% else %}
 #dhcp-vendorclass=set:red,Linux
 {% endif %}
