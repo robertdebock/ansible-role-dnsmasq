@@ -49,7 +49,12 @@ dnsmasq_no_dhcp_interface: ""
 dnsmasq_local_service: false
 dnsmasq_bind_interfaces: false
 dnsmasq_no_hosts: false
-# dnsmasq_addn_hosts: /etc/banner_add_hosts
+# dnsmasq_addn_hosts:
+#   - /etc/banner_add_hosts
+# dnsmasq_addn_hosts_conf:
+#   - path: "{{ dnsmasq_addn_hosts[0] }}"
+#     conf:
+#       - { ip: 192.168.0.1, fqdn: 'foo.example.org', hostname: 'foo' }
 dnsmasq_expand_hosts: false
 # dnsmasq_domains:
 #   - name: thekelleys.org.uk
