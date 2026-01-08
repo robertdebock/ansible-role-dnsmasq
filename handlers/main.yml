@@ -10,3 +10,8 @@
   ansible.builtin.service:
     name: "{{ dnsmasq_service }}"
     state: restarted
+
+- name: Reload dnsmasq
+  ansible.builtin.service:
+    name: dnsmasq
+    state: reloaded

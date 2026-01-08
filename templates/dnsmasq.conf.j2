@@ -1,4 +1,6 @@
-{{ ansible_managed | comment }}
+#
+# Ansible managed
+#
 # Configuration file for dnsmasq.
 #
 # Format is one option per line, legal options are the same
@@ -35,7 +37,7 @@ bogus-priv
 
 # Uncomment these to enable DNSSEC validation and caching:
 # (Requires dnsmasq to be built with DNSSEC option.)
-{% if dnsmasq_dnssec is defined and dnsmasq_dnssec %}
+{% if dnsmasq_dnssec is defined and dnsmasq_dnssec and dnsmasq_conf_file is defined %}
 conf-file={{ dnsmasq_conf_file }}
 dnssec
 {% else %}
@@ -235,7 +237,9 @@ no-hosts
 # or if you want it to read another file, as well as /etc/hosts, use
 # this.
 {% if dnsmasq_addn_hosts is defined %}
-addn-hosts={{ dnsmasq_addn_hosts }}
+{% for item in dnsmasq_addn_hosts %}
+addn-hosts={{ item }}
+{% endfor %}
 {% else %}
 #addn-hosts=/etc/banner_add_hosts
 {% endif %}
@@ -264,7 +268,7 @@ expand-hosts
 #domain=reserved.thekelleys.org.uk,192.68.3.100,192.168.3.200
 {% if dnsmasq_domains is defined %}
 {% for item in dnsmasq_domains %}
-domain={{ item.domain }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
+domain={{ item.name }}{% if item.subnet is defined %},{{ item.subnet }}{% endif %}{% if item.from is defined %},{{ item.from }},{{ item.until }}{% endif %}
 
 {% endfor %}
 {% endif %}
@@ -875,9 +879,9 @@ selfmx
 # A SRV record indicating that there is no LDAP server for the domain
 # example.com
 #srv-host=_ldap._tcp.example.com
-{% if dnsmasq_src_hosts is defined %}
-{% for item in dnsmasq_src_hosts %}
-src-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
+{% if dnsmasq_srv_hosts is defined %}
+{% for item in dnsmasq_srv_hosts %}
+srv-host={{ item.record }}{% if item.destination is defined %},{{ item.destination }}{% endif %}{% if item.port is defined %},{{ item.port }}{% endif %}{% if item.priority is defined %},{{ item.priority }}{% endif %}
 
 {% endfor %}
 {% endif %}
@@ -920,7 +924,7 @@ log-dhcp
 {% endif %}
 
 # Include another lot of configuration options.
-{% if dnsmasq_conf_file is defined %}
+{% if dnsmasq_dnssec is not defined and dnsmasq_conf_file is defined %}
 conf-file={{ dnsmasq_conf_file }}
 {% else %}
 #conf-file=/etc/dnsmasq.more.conf
@@ -937,10 +941,11 @@ conf-dir={{ dnsmasq_conf_dir }}
 # Include all files in a directory which end in .conf
 #conf-dir=/etc/dnsmasq.d/,*.conf
 
+{% if ansible_facts['os_family'] != 'FreeBSD' %}
 # Include all files in /etc/dnsmasq.d except RPM backup files
 conf-dir=/etc/dnsmasq.d,.rpmnew,.rpmsave,.rpmorig
 
-
+{% endif %}
 # If a DHCP client claims that its name is "wpad", ignore that.
 # This fixes a security hole. see CERT Vulnerability VU#598349
 {% if dnsmasq_dhcp_name_match is defined %}

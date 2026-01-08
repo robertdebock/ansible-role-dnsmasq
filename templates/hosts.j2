@@ -1,0 +1,6 @@
+#
+# Ansible managed
+#
+{% for item in config %}
+{{ item.ip }}    {{ item.fqdn }} {{ item.hostname|default('') }}
+{% endfor %}

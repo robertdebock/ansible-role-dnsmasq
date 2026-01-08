@@ -28,3 +28,17 @@
     name: "{{ dnsmasq_service }}"
     state: started
     enabled: true
+
+- name: "Configuring additional hosts file"
+  tags: fp_hosts_conf
+  ansible.builtin.template:
+    src: hosts.j2
+    dest: "{{ item.path }}"
+    owner: root
+    group: wheel
+    mode: "0644"
+  vars:
+    config: "{{ item.conf }}"
+  loop: "{{ dnsmasq_addn_hosts_conf }}"
+  when: dnsmasq_addn_hosts_conf is defined
+  notify: Reload dnsmasq
