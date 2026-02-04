@@ -1,0 +1,293 @@
+---
+argument_specs:
+  main:
+    short_description: Install and configure dnsmasq on your system.
+    options:
+      dnsmasq_port:
+        type: int
+        required: false
+        description: TCP/UDP port dnsmasq will listen on.
+
+      dnsmasq_domain_needed:
+        type: bool
+        required: false
+        description: Only forward queries that include a domain part.
+
+      dnsmasq_bogus_priv:
+        type: bool
+        required: false
+        description: Treat reverse lookups for private IP ranges as bogus.
+
+      dnsmasq_conf_file:
+        type: str
+        required: false
+        description: Path to the dnsmasq configuration file containing trust anchors.
+
+      dnsmasq_dnssec:
+        type: bool
+        required: false
+        description: Enable DNSSEC validation.
+
+      dnsmasq_dnssec_check_unsigned:
+        type: bool
+        required: false
+        description: Check unsigned replies when DNSSEC is enabled.
+
+      dnsmasq_filterwin2k:
+        type: bool
+        required: false
+        description: Filter useless Windows specific DNS requests.
+
+      dnsmasq_servers:
+        type: list
+        elements: dict
+        required: false
+        description: List of upstream DNS servers and optional domains, ports and interfaces.
+
+      dnsmasq_locals:
+        type: list
+        elements: dict
+        required: false
+        description: Local domains served by dnsmasq.
+
+      dnsmasq_addresses:
+        type: list
+        elements: dict
+        required: false
+        description: Static hostname to address mappings.
+
+      dnsmasq_ipsets:
+        type: list
+        elements: dict
+        required: false
+        description: IP set mappings for selected domains.
+
+      dnsmasq_user:
+        type: str
+        required: false
+        description: User account dnsmasq runs as.
+
+      dnsmasq_group:
+        type: str
+        required: false
+        description: Group dnsmasq runs as.
+
+      dnsmasq_interfaces:
+        type: list
+        elements: dict
+        required: false
+        description: Network interfaces dnsmasq will bind to.
+
+      dnsmasq_except_interface:
+        type: str
+        required: false
+        description: Interface that dnsmasq should ignore.
+
+      dnsmasq_listen_addresses:
+        type: list
+        elements: dict
+        required: false
+        description: IP addresses dnsmasq should listen on.
+
+      dnsmasq_no_dhcp_interface:
+        type: str
+        required: false
+        description: Interface on which dnsmasq should not offer DHCP.
+
+      dnsmasq_local_service:
+        type: bool
+        required: false
+        description: Limit dnsmasq to local interfaces only.
+
+      dnsmasq_bind_interfaces:
+        type: bool
+        required: false
+        description: Bind only to the interfaces specified.
+
+      dnsmasq_no_hosts:
+        type: bool
+        required: false
+        description: Do not read hostnames from /etc/hosts.
+
+      dnsmasq_addn_hosts:
+        type: str
+        required: false
+        description: Additional hosts file for static records.
+
+      dnsmasq_expand_hosts:
+        type: bool
+        required: false
+        description: Add the local domain to simple hostnames.
+
+      dnsmasq_domains:
+        type: list
+        elements: dict
+        required: false
+        description: Domain configuration for DHCP and DNS.
+
+      dnsmasq_dhcp_ranges:
+        type: list
+        elements: dict
+        required: false
+        description: DHCP address ranges and related options.
+
+      dnsmasq_enable_ra:
+        type: bool
+        required: false
+        description: Enable IPv6 router advertisements.
+
+      dnsmasq_hosts:
+        type: list
+        elements: dict
+        required: false
+        description: Static DHCP host entries.
+
+      dnsmasq_dhcp_ignore:
+        type: str
+        required: false
+        description: Expression describing DHCP requests to ignore.
+
+      dnsmasq_dhcp_vendorclass:
+        type: str
+        required: false
+        description: Vendor class based DHCP tags.
+
+      dnsmasq_dhcp_userclass:
+        type: str
+        required: false
+        description: User class based DHCP tags.
+
+      dnsmasq_dhcp_mac:
+        type: str
+        required: false
+        description: MAC address based DHCP tags.
+
+      dnsmasq_read_ethers:
+        type: bool
+        required: false
+        description: Read static hosts from /etc/ethers.
+
+      dnsmasq_dhcp_options:
+        type: list
+        elements: dict
+        required: false
+        description: Additional DHCP options.
+
+      dnsmasq_dhcp_option_force:
+        type: list
+        elements: dict
+        required: false
+        description: DHCP options that are always sent.
+
+      dnsmasq_dhcp_boot:
+        type: str
+        required: false
+        description: Boot filename for network booting clients.
+
+      dnsmasq_enable_tftp:
+        type: bool
+        required: false
+        description: Enable the built-in TFTP server.
+
+      dnsmasq_tftp_root:
+        type: str
+        required: false
+        description: Root directory for the TFTP server.
+
+      dnsmasq_tftp_no_fail:
+        type: bool
+        required: false
+        description: Do not fail if the TFTP root directory is missing.
+
+      dnsmasq_tftp_secure:
+        type: bool
+        required: false
+        description: Enable secure TFTP mode.
+
+      dnsmasq_tftp_no_blocksize:
+        type: bool
+        required: false
+        description: Disable TFTP blocksize negotiation.
+
+      dnsmasq_dhcp_lease_max:
+        type: int
+        required: false
+        description: Maximum number of DHCP leases.
+
+      dnsmasq_dhcp_leasefile:
+        type: str
+        required: false
+        description: Path to the DHCP lease file.
+
+      dnsmasq_dhcp_authoritative:
+        type: bool
+        required: false
+        description: Treat the DHCP server as authoritative.
+
+      dnsmasq_dhcp_rapid_commit:
+        type: bool
+        required: false
+        description: Enable rapid commit for DHCP.
+
+      dnsmasq_dhcp_script:
+        type: str
+        required: false
+        description: Script to call on DHCP events.
+
+      dnsmasq_cache_size:
+        type: int
+        required: false
+        description: Size of the DNS cache.
+
+      dnsmasq_no_negcache:
+        type: bool
+        required: false
+        description: Disable negative caching.
+
+      dnsmasq_local_ttl:
+        type: int
+        required: false
+        description: Default TTL for local records.
+
+      dnsmasq_bogus_nxdomain:
+        type: str
+        required: false
+        description: Upstream address to treat as bogus NXDOMAIN.
+
+      dnsmasq_aliases:
+        type: list
+        elements: dict
+        required: false
+        description: Address ranges that should be aliased.
+
+      dnsmasq_mx_hosts:
+        type: list
+        elements: dict
+        required: false
+        description: MX records served by dnsmasq.
+
+      dnsmasq_localmx:
+        type: bool
+        required: false
+        description: Use the local machine as mail exchanger.
+
+      dnsmasq_selfmx:
+        type: bool
+        required: false
+        description: Advertise the machine itself as mail exchanger.
+
+      dnsmasq_src_hosts:
+        type: list
+        elements: dict
+        required: false
+        description: SRV style records served by dnsmasq.
+
+      dnsmasq_log_queries:
+        type: bool
+        required: false
+        description: Log DNS queries.
+
+      dnsmasq_log_dhcp:
+        type: bool
+        required: false
+        description: Log DHCP activity.
