@@ -353,6 +353,10 @@ enable-ra
 # do not matter, it's permissible to give name, address and MAC in any
 # order.
 
+{% for item in dnsmasq_hosts %}
+dhcp-host={{ item.name }},{{ item.value }}
+{% endfor %}
+
 # Always allocate the host with Ethernet address 11:22:33:44:55:66
 # The IP address 192.168.0.60
 #dhcp-host=11:22:33:44:55:66,192.168.0.60
