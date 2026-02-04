@@ -148,6 +148,7 @@ dnsmasq_expand_hosts: false
 #       - name: ra-stateless
 #       - name: ra-names
 dnsmasq_enable_ra: false
+dnsmasq_hosts: []
 # dnsmasq_hosts:
 #   - name: "11:22:33:44:55:66"
 #     value: "192.168.0.60"
