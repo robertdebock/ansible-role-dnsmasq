@@ -539,15 +539,15 @@
       - dnsmasq_selfmx is boolean
     quiet: true
 
-- name: assert | Test dnsmasq_src_hosts
+- name: assert | Test dnsmasq_srv_hosts
   ansible.builtin.assert:
     that:
-      - dnsmasq_src_hosts is iterable
+      - dnsmasq_srv_hosts is iterable
     quiet: true
   when:
-    - dnsmasq_src_hosts is defined
+    - dnsmasq_srv_hosts is defined
 
-- name: assert | Test items in dnsmasq_src_hosts are set correctly
+- name: assert | Test items in dnsmasq_srv_hosts are set correctly
   ansible.builtin.assert:
     that:
       - item.record is defined
@@ -559,18 +559,18 @@
       - item.port is defined
       - item.port is number
     quiet: true
-  loop: "{{ dnsmasq_src_hosts }}"
+  loop: "{{ dnsmasq_srv_hosts }}"
   when:
-    - dnsmasq_src_hosts is defined
+    - dnsmasq_srv_hosts is defined
 
-- name: assert | Test item.priority in dnsmasq_src_hosts
+- name: assert | Test item.priority in dnsmasq_srv_hosts
   ansible.builtin.assert:
     that:
       - item.priority is number
       - item.priority >= 0
     quiet: true
   when:
-    - dnsmasq_src_hosts is defined
+    - dnsmasq_srv_hosts is defined
     - item.priority is defined
 
 - name: assert | Test dnsmasq_log_queries
