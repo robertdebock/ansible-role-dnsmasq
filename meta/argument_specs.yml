@@ -276,7 +276,7 @@ argument_specs:
         required: false
         description: Advertise the machine itself as mail exchanger.
 
-      dnsmasq_src_hosts:
+      dnsmasq_srv_hosts:
         type: list
         elements: dict
         required: false
